@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #0f0f14;
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* MENU */
+.menu {
+    display: flex;
+    align-content: start;
+    padding: 20px 40px;
+    background: #0f0f14;
+    border-bottom: 1px solid #1f1f2a;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img {
+    height: 35px;
+}
+
+.logo span {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* HERO */
+.hero {
+    min-height: calc(100vh - 80px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+
+/* TEXTO */
+.hero-content {
+    max-width: 600px;
+    margin-bottom: 40px;
+}
+
+.hero-content h1 {
+    font-size: 42px;
+    margin-bottom: 15px;
+}
+
+.hero-content p {
+    color: #aaa;
+    line-height: 1.6;
+}
+
+/* CARDS */
+.games {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+/* CARD BASE */
+.game-card {
+    position: relative;
+    width: 260px;
+    height: 160px;
+    border-radius: 14px;
+    overflow: hidden;
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+
+    background-size: cover;
+    background-position: center;
+
+    transition: 0.3s;
+}
+
+/* OVERLAY ESCURO */
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+}
+
+/* TEXTO */
+.game-card h2 {
+    position: relative;
+    z-index: 1;
+}
+
+/* HOVER */
+.game-card:hover {
+    transform: scale(1.05);
+    filter: brightness(1.2);
+}
+
+/* TEMAS (cores simulando imagem) */
+.harry {
+    background: linear-gradient(135deg, #3b2b1f, #000);
+}
+
+.barbie {
+    background: linear-gradient(135deg, #ff4fa3, #ff9acb);
+}
+
+.teenwolf {
+    background: linear-gradient(135deg, #1a0000, #550000);
+}
