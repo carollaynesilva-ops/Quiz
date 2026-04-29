@@ -1,36 +1,37 @@
+let tempo = 10;
+
+const timerEl = document.getElementById("timer");
 const buttons = document.querySelectorAll(".btn-opcao");
 const respostaInput = document.getElementById("resposta");
 const form = document.getElementById("formQuiz");
 
+// garante que começa do zero sempre
+if (timerEl) {
+    timerEl.textContent = tempo;
+
+    const intervalo = setInterval(() => {
+        tempo--;
+        timerEl.textContent = tempo;
+
+        if (tempo <= 0) {
+            clearInterval(intervalo);
+
+            respostaInput.value = -1;
+            form.submit();
+        }
+    }, 1000);
+}
+
+// clique nas opções
 buttons.forEach(btn => {
     btn.addEventListener("click", () => {
-        // animação
+
         btn.classList.add("clicado");
 
-        // pega valor
         respostaInput.value = btn.dataset.value;
 
-        // envia após pequeno delay
         setTimeout(() => {
             form.submit();
         }, 300);
     });
 });
-
-
-// TIMER
-let tempo = 10;
-const timerEl = document.getElementById("timer");
-
-const intervalo = setInterval(() => {
-    tempo--;
-    timerEl.textContent = tempo;
-
-    if (tempo <= 0) {
-        clearInterval(intervalo);
-
-        // envia sem resposta (vale 0)
-        document.getElementById("resposta").value = -1;
-        document.getElementById("formQuiz").submit();
-    }
-}, 1000);

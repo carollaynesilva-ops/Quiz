@@ -9,6 +9,7 @@ session_destroy();
     <meta charset="UTF-8">
     <title>Quiz</title>
     <link rel="stylesheet" href="assets/css/home.css">
+    <script src="assets/js/script.js"></script>
 </head>
 <body>
 
@@ -58,6 +59,6 @@ session_destroy();
     </section>
 
 </main>
-
+<script src="assets/js/script.js"></script>
 </body>
 </html>

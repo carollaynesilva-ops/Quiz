@@ -16,3 +16,6 @@ body.teenwolf {
 .teenwolf .btn-opcao:hover {
     background: #cc2f2f;
 }
+body.resultado.teenwolf {
+    background: url('../img/teenwolf-bg.jpg') center/cover no-repeat;
+}

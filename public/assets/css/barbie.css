@@ -16,3 +16,6 @@ body.barbie {
 .barbie .btn-opcao:hover {
     background: #e0267f;
 }
+body.resultado.barbie {
+    background: url('../img/barbie-bg.jpg') center/cover no-repeat;
+}

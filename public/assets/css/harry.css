@@ -16,3 +16,6 @@ body.harry {
 .harry .btn-opcao:hover {
     background: #d4b44c;
 }
+body.resultado.harry {
+    background: url('../img/harry-bg.jpg') center/cover no-repeat;
+}

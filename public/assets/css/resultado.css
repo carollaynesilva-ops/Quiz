@@ -1,0 +1,70 @@
+body.resultado {
+    font-family: 'Segoe UI', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CAIXA */
+.resultado-box {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    width: 320px;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* TEXTO */
+.resultado-box h1 {
+    margin-bottom: 20px;
+}
+
+.placar p {
+    margin: 5px 0;
+}
+
+.mensagem {
+    margin: 20px 0;
+    font-weight: bold;
+}
+
+/* BOTÃO */
+.btn-voltar {
+    display: inline-block;
+    padding: 10px 20px;
+    background: black;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+.btn-voltar:hover {
+    background: #333;
+}
+
+.titulo {
+    font-size: 24px;
+    margin: 15px 0;
+}
+
+.mensagem {
+    font-size: 14px;
+    color: #555;
+}
+
+body.harry .titulo {
+    color: gold;
+}
+
+body.barbie .titulo {
+    color: #ff007b;
+    font-size: 20px;
+}
+
+body.teenwolf .titulo {
+    color: #ff3b3b;
+}
