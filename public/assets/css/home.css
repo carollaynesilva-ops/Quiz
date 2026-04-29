@@ -6,21 +6,15 @@
 
 body {
     font-family: 'Segoe UI', sans-serif;
-    background: #0f0f14;
-    color: white;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    background: #ffffff;
+    color: #222;
 }
 
 /* MENU */
 .menu {
-    display: flex;
-    align-content: start;
-    padding: 20px 40px;
-    background: #0f0f14;
-    border-bottom: 1px solid #1f1f2a;
+    background: #e30613;
+    padding: 15px 40px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 .logo {
@@ -30,96 +24,79 @@ body {
 }
 
 .logo img {
-    height: 35px;
+    height: 40px;
 }
 
 .logo span {
+    color: white;
     font-weight: bold;
     font-size: 18px;
 }
 
-/* HERO */
-.hero {
-    min-height: calc(100vh - 80px);
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
+/* CONTAINER */
+.container {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 0 20px;
     text-align: center;
 }
 
-/* TEXTO */
-.hero-content {
-    max-width: 600px;
-    margin-bottom: 40px;
-}
-
-.hero-content h1 {
-    font-size: 42px;
+/* INTRO */
+.intro h1 {
+    font-size: 32px;
     margin-bottom: 15px;
 }
 
-.hero-content p {
-    color: #aaa;
-    line-height: 1.6;
+.intro p {
+    color: #555;
+    margin-bottom: 10px;
 }
 
-/* CARDS */
-.games {
+.destaque {
+    color: #e30613;
+    font-weight: bold;
+}
+
+/* TEMAS */
+.temas {
+    margin-top: 40px;
     display: flex;
     gap: 25px;
+    justify-content: center;
     flex-wrap: wrap;
 }
 
-/* CARD BASE */
-.game-card {
-    position: relative;
+/* CARD */
+.card {
     width: 260px;
-    height: 160px;
-    border-radius: 14px;
+    border-radius: 12px;
     overflow: hidden;
     text-decoration: none;
-    color: white;
-    display: flex;
-    align-items: flex-end;
-    padding: 20px;
+    background: #fff;
 
-    background-size: cover;
-    background-position: center;
-
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
     transition: 0.3s;
 }
 
-/* OVERLAY ESCURO */
-.overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+/* IMAGEM */
+.card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
 }
 
 /* TEXTO */
-.game-card h2 {
-    position: relative;
-    z-index: 1;
+.card-info {
+    padding: 15px;
+}
+
+.card-info h2 {
+    font-size: 18px;
+    color: #222;
 }
 
 /* HOVER */
-.game-card:hover {
-    transform: scale(1.05);
-    filter: brightness(1.2);
-}
-
-/* TEMAS (cores simulando imagem) */
-.harry {
-    background: linear-gradient(135deg, #3b2b1f, #000);
-}
-
-.barbie {
-    background: linear-gradient(135deg, #ff4fa3, #ff9acb);
-}
-
-.teenwolf {
-    background: linear-gradient(135deg, #1a0000, #550000);
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
