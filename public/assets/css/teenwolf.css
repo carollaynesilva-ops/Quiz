@@ -1,0 +1,18 @@
+body.teenwolf {
+    background: #0f0f0f;
+    color: #ff3b3b;
+}
+
+.teenwolf .quiz-container {
+    background: #1a1a1a;
+    border: 2px solid #ff3b3b;
+}
+
+.teenwolf .btn-opcao {
+    background: #ff3b3b;
+    color: white;
+}
+
+.teenwolf .btn-opcao:hover {
+    background: #cc2f2f;
+}

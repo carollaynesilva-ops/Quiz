@@ -22,4 +22,6 @@ class Pergunta {
     public function isCorreta(int $resposta): bool {
         return $resposta === $this->correta;
     }
+
+    
 }

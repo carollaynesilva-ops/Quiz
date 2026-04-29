@@ -1,0 +1,96 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* CONTAINER */
+.quiz-container {
+    width: 90%;
+    max-width: 500px;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+/* PERGUNTA */
+.pergunta {
+    margin-bottom: 25px;
+}
+
+/* BOTÕES */
+.opcoes {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-opcao {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+    font-weight: bold;
+}
+
+.topo {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+/* BARRA */
+.barra {
+    width: 80%;
+    height: 10px;
+    background: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progresso {
+    height: 100%;
+    background: #4caf50;
+}
+
+/* TIMER */
+.timer {
+    font-weight: bold;
+}
+
+/* OPÇÕES COM IMAGEM */
+.btn-opcao {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+}
+
+.btn-opcao img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.btn-opcao {
+    transition: 0.2s;
+}
+
+.btn-opcao:hover {
+    transform: scale(1.03);
+}
+
+.btn-opcao.clicado {
+    transform: scale(0.95);
+    opacity: 0.7;
+}

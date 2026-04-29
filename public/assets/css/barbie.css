@@ -1,12 +1,18 @@
-body {
-    background: pink;
-    color: white;
-    font-family: Arial;
+body.barbie {
+    background: #ffe4f0;
+    color: #ff2e93;
 }
 
-button {
+.barbie .quiz-container {
     background: white;
-    color: pink;
-    border-radius: 10px;
-    padding: 10px;
+    border: 2px solid #ff2e93;
+}
+
+.barbie .btn-opcao {
+    background: #ff2e93;
+    color: white;
+}
+
+.barbie .btn-opcao:hover {
+    background: #e0267f;
 }

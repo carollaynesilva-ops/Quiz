@@ -34,7 +34,13 @@ $controller = new QuizController($quiz);
 
 // resposta
 if ($_POST && isset($_POST['resposta'])) {
-    $controller->responder((int)$_POST['resposta']);
+    $resposta = (int)$_POST['resposta'];
+
+    if ($resposta >= 0) {
+        $controller->responder($resposta);
+    } else {
+        $_SESSION['indice']++;
+    }
 }
 
 // terminou?
@@ -44,16 +50,59 @@ if ($controller->terminou()) {
 }
 
 $pergunta = $controller->getPerguntaAtual();
+
+
 ?>
 
-<link rel="stylesheet" href="assets/css/<?= $temaEscolhido ?>.css">
+<!DOCTYPE html>
+<html lang="pt-br">
 
-<h2><?= $pergunta->getTexto(); ?></h2>
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz</title>
 
-<form method="POST">
-    <?php foreach ($pergunta->getOpcoes() as $i => $opcao): ?>
-        <button name="resposta" value="<?= $i ?>">
-            <?= $opcao ?>
-        </button>
-    <?php endforeach; ?>
-</form>
+    <!-- CSS base -->
+    <link rel="stylesheet" href="assets/css/quiz.css">
+
+    <!-- CSS do tema -->
+    <link rel="stylesheet" href="assets/css/<?= $temaEscolhido ?>.css">
+</head>
+
+<body class="<?= $temaEscolhido ?>">
+
+    <div class="quiz-container">
+
+        <h2 class="pergunta">
+            <?= $pergunta->getTexto(); ?>
+        </h2>
+
+        <div class="topo">
+            <div class="barra">
+                <div class="progresso" style="width: <?= ($_SESSION['indice'] / $quiz->total()) * 100 ?>%"></div>
+            </div>
+
+            <div class="timer" id="timer">10</div>
+        </div>
+
+        <h2 class="pergunta"><?= $pergunta->getTexto(); ?></h2>
+
+        <form method="POST" class="opcoes" id="formQuiz">
+            <?php foreach ($pergunta->getOpcoes() as $i => $opcao): ?>
+
+                <button type="button" class="btn-opcao" data-value="<?= $i ?>">
+
+                    <img src="assets/img/<?= $opcao['img'] ?>" alt="">
+                    <span><?= $opcao['texto'] ?></span>
+
+                </button>
+
+            <?php endforeach; ?>
+
+            <input type="hidden" name="resposta" id="resposta">
+        </form>
+
+    </div>
+
+</body>
+
+</html>
