@@ -6,10 +6,10 @@ return [
     new Pergunta(
         "Qual a cor principal da Barbie?",
         [
-            ["texto" => "Azul", "img" => "barbie1.jpg"],
-            ["texto" => "Rosa", "img" => "barbie2.jpg"],
-            ["texto" => "Preto", "img" => "barbie3.jpg"],
-            ["texto" => "Verde", "img" => "barbie4.jpg"]
+            ["texto" => "Azul", "img" => "azul.jpg"],
+            ["texto" => "Rosa", "img" => "rosa.jpg"],
+            ["texto" => "Preto", "img" => "preto.jpg"],
+            ["texto" => "Verde", "img" => "verde.jpg"]
         ],
         1
     ),
@@ -17,10 +17,10 @@ return [
     new Pergunta(
         "A Barbie pode ser:",
         [
-            ["texto" => "Apenas modelo", "img" => "barbie1.jpg"],
-            ["texto" => "Qualquer profissão", "img" => "barbie2.jpg"],
-            ["texto" => "Só médica", "img" => "barbie3.jpg"],
-            ["texto" => "Nada", "img" => "barbie4.jpg"]
+            ["texto" => "Apenas modelo", "img" => "modelo.jpg"],
+            ["texto" => "Qualquer profissão", "img" => "qualquer.jpg"],
+            ["texto" => "Só médica", "img" => "medica.jpg"],
+            ["texto" => "Nada", "img" => "nada.jpg"]
         ],
         1
     ),

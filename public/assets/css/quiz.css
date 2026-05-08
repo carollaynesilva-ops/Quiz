@@ -6,91 +6,151 @@
 
 body {
     font-family: 'Segoe UI', sans-serif;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+
+    min-height: 100vh;
+
+    padding: 20px;
 }
 
 /* CONTAINER */
+
 .quiz-container {
-    width: 90%;
-    max-width: 500px;
-    padding: 30px;
-    border-radius: 12px;
+    width: 100%;
+    max-width: 850px;
+
+    padding: 20px;
+    border-radius: 20px;
+
     text-align: center;
 }
-
-/* PERGUNTA */
-.pergunta {
-    margin-bottom: 25px;
-}
-
-/* BOTÕES */
-.opcoes {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.btn-opcao {
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.2s;
-    font-weight: bold;
-}
+/* TOPO */
 
 .topo {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    align-items: center;
+
+    margin-bottom: 25px;
 }
 
 /* BARRA */
+
 .barra {
     width: 80%;
-    height: 10px;
+    height: 12px;
+
     background: #ddd;
-    border-radius: 5px;
+
+    border-radius: 20px;
     overflow: hidden;
 }
 
 .progresso {
     height: 100%;
     background: #00ffff;
+
+    transition: .3s;
 }
 
 /* TIMER */
+
 .timer {
+    font-size: 24px;
     font-weight: bold;
 }
 
-/* OPÇÕES COM IMAGEM */
+/* PERGUNTA */
+
+.pergunta {
+    margin-bottom: 35px;
+
+    font-size: 32px;
+    line-height: 1.3;
+}
+
+/* GRID DAS OPÇÕES */
+
+.opcoes {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 15px;
+}
+
+/* CARD */
+
 .btn-opcao {
+    background: white;
+
+    border: none;
+    border-radius: 22px;
+
+    padding: 18px;
+
+    cursor: pointer;
+
+    transition: .25s;
+
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 10px;
-    padding: 10px;
-}
 
-.btn-opcao img {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 6px;
-}
-
-.btn-opcao {
-    transition: 0.2s;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
 }
 
 .btn-opcao:hover {
-    transform: scale(1.03);
+    transform: translateY(-5px) scale(1.02);
 }
 
 .btn-opcao.clicado {
-    transform: scale(0.95);
-    opacity: 0.7;
+    transform: scale(.96);
+    opacity: .8;
+}
+
+/* IMAGEM */
+
+.imagem-opcao {
+    width: 100%;
+}
+
+.imagem-opcao img {
+    width: 100%;
+    height: 170px;
+
+    object-fit: cover;
+
+    border-radius: 18px;
+}
+
+/* TEXTO */
+
+.texto-opcao {
+    margin-top: 10px;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    text-align: center;
+}
+
+/* RESPONSIVO */
+
+@media (max-width: 768px) {
+
+    .opcoes {
+        grid-template-columns: 1fr;
+    }
+
+    .pergunta {
+        font-size: 24px;
+    }
+
+    .imagem-opcao img {
+        height: 200px;
+    }
 }

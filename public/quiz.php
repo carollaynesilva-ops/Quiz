@@ -91,16 +91,25 @@ $pergunta = $controller->getPerguntaAtual();
         </h2>
 
         <form method="POST" class="opcoes" id="formQuiz">
+
             <?php foreach ($pergunta->getOpcoes() as $i => $opcao): ?>
 
                 <button type="button" class="btn-opcao" data-value="<?= $i ?>">
-                    <img src="assets/img/<?= $opcao['img'] ?>" alt="">
-                    <span><?= $opcao['texto'] ?></span>
+
+                    <div class="imagem-opcao">
+                        <img src="assets/img/<?= $opcao['img'] ?>" alt="">
+                    </div>
+
+                    <div class="texto-opcao">
+                        <?= $opcao['texto'] ?>
+                    </div>
+
                 </button>
 
             <?php endforeach; ?>
 
             <input type="hidden" name="resposta" id="resposta">
+
         </form>
 
     </div>
