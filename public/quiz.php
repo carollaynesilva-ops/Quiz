@@ -64,8 +64,7 @@ $pergunta = $controller->getPerguntaAtual();
     <!-- CSS base -->
     <link rel="stylesheet" href="assets/css/quiz.css">
 
-    <!-- CSS do tema -->
-    <link rel="stylesheet" href="assets/css/<?= $temaEscolhido ?>.css">
+
 
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
@@ -74,48 +73,97 @@ $pergunta = $controller->getPerguntaAtual();
 
 <body class="<?= $temaEscolhido ?>">
 
-    <div class="quiz-container">
+    <header class="menu">
 
-        <div class="topo">
-            <div class="barra">
-                <div class="progresso"
-                    style="width: <?= (($_SESSION['indice'] ?? 0) / $quiz->total()) * 100 ?>%">
-                </div>
+        <div class="logo">
+
+            <img src="assets/img/senai.png" alt="SENAI">
+
+            <div class="logo-text">
+
+                <h2>SYS.<span>RES</span></h2>
+                <span>SELECIONE O PROTOCOLO</span>
+
             </div>
 
-            <div class="timer" id="timer">10</div>
         </div>
 
-        <h2 class="pergunta">
-            <?= $pergunta->getTexto(); ?>
-        </h2>
+        <button id="themeToggle" class="theme-btn">
+            ☀
+        </button>
 
-        <form method="POST" class="opcoes" id="formQuiz">
+    </header>
 
-            <?php foreach ($pergunta->getOpcoes() as $i => $opcao): ?>
+    <main class="quiz-wrapper">
 
-                <button type="button" class="btn-opcao" data-value="<?= $i ?>">
+        <div class="quiz-container">
 
-                    <div class="imagem-opcao">
-                        <img src="assets/img/<?= $opcao['img'] ?>" alt="">
+            <!-- TOPO -->
+
+            <div class="topo">
+
+                <div class="barra">
+
+                    <div class="progresso"
+                        style="width: <?= (($_SESSION['indice'] ?? 0) / $quiz->total()) * 100 ?>%">
                     </div>
 
-                    <div class="texto-opcao">
-                        <?= $opcao['texto'] ?>
-                    </div>
+                </div>
 
-                </button>
+                <div class="timer" id="timer">
+                    10
+                </div>
 
-            <?php endforeach; ?>
+            </div>
 
-            <input type="hidden" name="resposta" id="resposta">
+            <!-- PERGUNTA -->
 
-        </form>
+            <h2 class="pergunta">
 
-    </div>
+                <?= $pergunta->getTexto(); ?>
+
+            </h2>
+
+            <!-- OPÇÕES -->
+
+            <form method="POST" class="opcoes" id="formQuiz">
+
+                <?php foreach ($pergunta->getOpcoes() as $i => $opcao): ?>
+
+                    <button
+                        type="button"
+                        class="btn-opcao"
+                        data-value="<?= $i ?>">
+
+                        <div class="imagem-opcao">
+
+                            <img
+                                src="assets/img/<?= $opcao['img'] ?>"
+                                alt="">
+
+                        </div>
+
+                        <div class="texto-opcao">
+
+                            <?= $opcao['texto'] ?>
+
+                        </div>
+
+                    </button>
+
+                <?php endforeach; ?>
+
+                <input
+                    type="hidden"
+                    name="resposta"
+                    id="resposta">
+
+            </form>
+
+        </div>
+
+    </main>
 
     <script src="assets/js/script.js"></script>
 
 </body>
-
-</html>

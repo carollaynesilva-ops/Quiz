@@ -22,7 +22,7 @@ return [
             ["texto" => "Harry Alvo Potter", "img" => "harry3.jpg"],
             ["texto" => "Harry Remus Potter", "img" => "harry4.jpg"]
         ],
-        0
+        0 // mostra a resposta correta(isso é um array querida)
     ),
 
     new Pergunta(
