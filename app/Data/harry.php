@@ -18,9 +18,9 @@ return [
         "Qual é o nome completo do Harry?",
         [
             ["texto" => "Harry James Potter", "img" => "harry.jpg"],
-            ["texto" => "Harry Sirius Potter", "img" => "harry.jpg"],
-            ["texto" => "Harry Alvo Potter", "img" => "harry.jpg"],
-            ["texto" => "Harry Remus Potter", "img" => "harry.jpg"]
+            ["texto" => "Harry Sirius Potter", "img" => "harry2.jpg"],
+            ["texto" => "Harry Alvo Potter", "img" => "harry3.jpg"],
+            ["texto" => "Harry Remus Potter", "img" => "harry4.jpg"]
         ],
         0
     ),
