@@ -7,58 +7,137 @@ session_destroy();
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Quiz</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corporate Training</title>
+
+    <!-- Fonte moderna -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="assets/css/home.css">
-    <script src="assets/js/script.js"></script>
 </head>
 <body>
 
 <header class="menu">
+
     <div class="logo">
         <img src="assets/img/senai.png" alt="SENAI">
-        <span>Quiz Interativo</span>
+        <div class="logo-text">
+            <h2>Corporate Training</h2>
+            <span>Plataforma de Treinamentos</span>
+        </div>
     </div>
+
 </header>
 
 <main class="container">
 
     <section class="intro">
-        <h1>Explore o que criamos</h1>
+
+        <span class="tag">Treinamento Empresarial</span>
+
+        <h1>
+            Capacitação Interativa
+            para Empresas
+        </h1>
+
         <p>
-            Este projeto foi desenvolvido durante o curso de Desenvolvimento de Sistemas,
-            aplicando conceitos de backend com PHP, organização em classes e lógica de programação.
+            Plataforma desenvolvida para treinamentos corporativos,
+            permitindo avaliar conhecimentos essenciais de forma
+            prática, rápida e interativa.
         </p>
-        <p class="destaque">
-            Escolha um tema e teste seus conhecimentos.
-        </p>
+
     </section>
 
     <section class="temas">
 
-        <a href="quiz.php?tema=harry" class="card">
-            <img src="assets/img/harry.jpg" alt="Harry Potter">
+        <!-- PRIMEIROS SOCORROS -->
+        <a href="quiz.php?tema=primeirossocorros" class="card">
+
+            <img src="assets/img/primeiros-socorros.jpg" alt="Primeiros Socorros">
+
             <div class="card-info">
-                <h2>Harry Potter</h2>
+
+                <span class="categoria">
+                    Segurança
+                </span>
+
+                <h2>Primeiros Socorros</h2>
+
+                <p>
+                    Conhecimentos básicos para agir em emergências.
+                </p>
+
             </div>
+
         </a>
 
-        <a href="quiz.php?tema=barbie" class="card">
-            <img src="assets/img/barbie.jpg" alt="Barbie">
+        <!-- EPI -->
+        <a href="quiz.php?tema=epi" class="card">
+
+            <img src="assets/img/epi.jpg" alt="EPI">
+
             <div class="card-info">
-                <h2>Barbie</h2>
+
+                <span class="categoria">
+                    Proteção
+                </span>
+
+                <h2>EPI's</h2>
+
+                <p>
+                    Uso correto de equipamentos de proteção individual.
+                </p>
+
             </div>
+
         </a>
 
-        <a href="quiz.php?tema=teenwolf" class="card">
-            <img src="assets/img/teenwolf.jpg" alt="Teen Wolf">
+        <!-- LGPD -->
+        <a href="quiz.php?tema=lgpd" class="card">
+
+            <img src="assets/img/lgpd.png" alt="LGPD">
+
             <div class="card-info">
-                <h2>Teen Wolf</h2>
+
+                <span class="categoria">
+                    Segurança Digital
+                </span>
+
+                <h2>LGPD</h2>
+
+                <p>
+                    Proteção de dados e boas práticas digitais.
+                </p>
+
             </div>
+
+        </a>
+
+        <!-- INCÊNDIO -->
+        <a href="quiz.php?tema=incendio" class="card">
+
+            <img src="assets/img/incendio.png" alt="Incêndio">
+
+            <div class="card-info">
+
+                <span class="categoria">
+                    Emergência
+                </span>
+
+                <h2>Prevenção de Incêndio</h2>
+
+                <p>
+                    Procedimentos básicos em situações de incêndio.
+                </p>
+
+            </div>
+
         </a>
 
     </section>
 
 </main>
-<script src="assets/js/script.js"></script>
+
 </body>
 </html>
