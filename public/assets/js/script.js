@@ -35,3 +35,28 @@ buttons.forEach(btn => {
         }, 300);
     });
 });
+
+//TEMA CLARO OU ESCURO
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    const themeBtn = document.getElementById('themeToggle');
+
+    themeBtn.addEventListener('click', () => {
+
+        document.body.classList.toggle('light-mode');
+
+        // troca ícone
+        if(document.body.classList.contains('light-mode')){
+
+            themeBtn.innerHTML = '🌙';
+
+        }else{
+
+            themeBtn.innerHTML = '☀';
+
+        }
+
+    });
+
+});

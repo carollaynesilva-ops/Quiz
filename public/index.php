@@ -15,18 +15,28 @@ session_destroy();
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="assets/css/home.css">
+    <script src="assets/js/script.js"></script>
 </head>
 <body>
 
 <header class="menu">
 
     <div class="logo">
+
         <img src="assets/img/senai.png" alt="SENAI">
+
         <div class="logo-text">
+
             <h2>Corporate Training</h2>
             <span>Plataforma de Treinamentos</span>
+
         </div>
+
     </div>
+
+    <button id="themeToggle" class="theme-btn">
+        ☀
+    </button>
 
 </header>
 
@@ -138,6 +148,6 @@ session_destroy();
     </section>
 
 </main>
-
+<script src="assets/js/script.js"></script>
 </body>
 </html>
