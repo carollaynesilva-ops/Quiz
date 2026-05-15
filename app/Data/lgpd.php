@@ -4,58 +4,162 @@ require_once __DIR__ . '/../Classes/Pergunta.php';
 return [
 
     new Pergunta(
-        "Qual casa o Harry pertence?",
+
+        "O que é Wi-Fi?",
+
         [
-            ["texto" => "Sonserina", "img" => "sonserina.jpg"],
-            ["texto" => "Grifinória", "img" => "grifinoria.jpg"],
-            ["texto" => "Corvinal", "img" => "corvinal.jpg"],
-            ["texto" => "Lufa-Lufa", "img" => "lufalufa.jpg"]
+
+            [
+                "texto" => "Um cabo de energia",
+                "img" => "cabo.jpg"
+            ],
+
+            [
+                "texto" => "Uma internet sem fio",
+                "img" => "wifi.jpg"
+            ],
+
+            [
+                "texto" => "Um tipo de monitor",
+                "img" => "monitor.jpg"
+            ],
+
+            [
+                "texto" => "Um aplicativo de celular",
+                "img" => "app.jpg"
+            ]
+
         ],
+
         1
+
     ),
 
     new Pergunta(
-        "Qual é o nome completo do Harry?",
-        [
-            ["texto" => "Harry James Potter", "img" => "harry.jpg"],
-            ["texto" => "Harry Sirius Potter", "img" => "harry2.jpg"],
-            ["texto" => "Harry Alvo Potter", "img" => "harry3.jpg"],
-            ["texto" => "Harry Remus Potter", "img" => "harry4.jpg"]
-        ],
-        0 // mostra a resposta correta(isso é um array querida)
-    ),
 
-    new Pergunta(
-        "Quem é o diretor de Hogwarts?",
-        [
-            ["texto" => "Snape", "img" => "snape.jpg"],
-            ["texto" => "Dumbledore", "img" => "dumbledore.jpg"],
-            ["texto" => "Hagrid", "img" => "hagrid.jpg"],
-            ["texto" => "Draco", "img" => "draco.jpg"]
-        ],
-        1
-    ),
+        "Qual cuidado ajuda na segurança digital?",
 
-    new Pergunta(
-        "Qual o nome do melhor amigo do Harry?",
         [
-            ["texto" => "Draco", "img" => "draco.jpg"],
-            ["texto" => "Rony", "img" => "rony.jpg"],
-            ["texto" => "Neville", "img" => "neville.jpg"],
-            ["texto" => "Cedrico", "img" => "cedrico.jpg"]
-        ],
-        1
-    ),
 
-    new Pergunta(
-        "Qual feitiço desarma o oponente?",
-        [
-            ["texto" => "Avada Kedavra", "img" => "varinha.jpg"],
-            ["texto" => "Expecto Patronum", "img" => "varinha.jpg"],
-            ["texto" => "Expelliarmus", "img" => "varinha.jpg"],
-            ["texto" => "Lumos", "img" => "varinha.jpg"]
+            [
+                "texto" => "Usar a mesma senha",
+                "img" => "senha.jpg"
+            ],
+
+            [
+                "texto" => "Compartilhar senhas",
+                "img" => "compartilhar.jpg"
+            ],
+
+            [
+                "texto" => "Atualizar programas e usar senhas fortes",
+                "img" => "seguranca_senha.jpg"
+            ],
+
+            [
+                "texto" => "Desativar antivírus",
+                "img" => "antivirus.jpg"
+            ]
+
         ],
+
         2
-    )
 
+    ),
+
+    new Pergunta(
+
+        "Qual é a principal função de um navegador?",
+
+        [
+
+            [
+                "texto" => "Editar imagens",
+                "img" => "imagem.jpg"
+            ],
+
+            [
+                "texto" => "Acessar conteúdos online",
+                "img" => "navegador.jpg"
+            ],
+
+            [
+                "texto" => "Melhorar áudio",
+                "img" => "audio.jpg"
+            ],
+
+            [
+                "texto" => "Criar hardware",
+                "img" => "hardware.jpg"
+            ]
+
+        ],
+
+        1
+
+    ),
+
+    new Pergunta(
+
+        "Qual dispositivo é usado para armazenar arquivos?",
+
+        [
+
+            [
+                "texto" => "Mouse",
+                "img" => "mouse.jpg"
+            ],
+
+            [
+                "texto" => "Teclado",
+                "img" => "teclado.jpg"
+            ],
+
+            [
+                "texto" => "SSD",
+                "img" => "ssd.jpg"
+            ],
+
+            [
+                "texto" => "Webcam",
+                "img" => "webcam.jpg"
+            ]
+
+        ],
+
+        2
+
+    ),
+
+    new Pergunta(
+
+        "Qual peça é o “cérebro” do computador?",
+
+        [
+
+            [
+                "texto" => "Mouse",
+                "img" => "mouse2.jpg"
+            ],
+
+            [
+                "texto" => "Monitor",
+                "img" => "monitor.jpg"
+            ],
+
+            [
+                "texto" => "Processador",
+                "img" => "processador.jpg"
+            ],
+
+            [
+                "texto" => "Caixa de som",
+                "img" => "som.jpg"
+            ]
+
+        ],
+
+        2
+
+    )
 ];

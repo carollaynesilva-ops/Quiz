@@ -1,4 +1,4 @@
-let tempo = 10;
+let tempo = 15;
 
 const timerEl = document.getElementById("timer");
 const buttons = document.querySelectorAll(".btn-opcao");

@@ -48,12 +48,12 @@ return [
 
             [
                 "texto" => "Luva descartável de plástico",
-                "img" => ".luva-plastico.jpg"
+                "img" => "luva-plastico.jpg"
             ],
 
             [
                 "texto" => "Luva térmica doméstica",
-                "img" => ".luva-termica.jpg"
+                "img" => "luva-termica.jpg"
             ]
 
         ],

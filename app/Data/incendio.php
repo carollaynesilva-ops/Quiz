@@ -4,58 +4,162 @@ require_once __DIR__ . '/../Classes/Pergunta.php';
 return [
 
     new Pergunta(
-        "O Scott é o quê?",
+
+        "Qual é a primeira atitude ao identificar um princípio de incêndio?",
+
         [
-            ["texto" => "Vampiro", "img" => "scott.jpg"],
-            ["texto" => "Lobisomem", "img" => "scott.jpg"],
-            ["texto" => "Fantasma", "img" => "scott.jpg"],
-            ["texto" => "Humano", "img" => "scott.jpg"]
+
+            [
+                "texto" => "Continuar trabalhando normalmente",
+                "img" => "trabalho.jpg"
+            ],
+
+            [
+                "texto" => "Apagar o fogo sem avaliar riscos",
+                "img" => "apagar.jpg"
+            ],
+
+            [
+                "texto" => "Acionar o alarme e comunicar",
+                "img" => "alarme.jpg"
+            ],
+
+            [
+                "texto" => "Abrir portas e janelas",
+                "img" => "janelas.jpg"
+            ]
+
         ],
-        1
+
+        2
+
     ),
 
     new Pergunta(
-        "Quem é o melhor amigo do Scott?",
+
+        "Qual extintor é indicado para equipamentos elétricos?",
+
         [
-            ["texto" => "Derek", "img" => "stiles.jpg"],
-            ["texto" => "Stiles", "img" => "stiles.jpg"],
-            ["texto" => "Jackson", "img" => "jackson.jpg"],
-            ["texto" => "Peter", "img" => "peter.jpg"]
+
+            [
+                "texto" => "Extintor de água",
+                "img" => "extintor_agua.jpg"
+            ],
+
+            [
+                "texto" => "Extintor de espuma",
+                "img" => "espuma.jpg"
+            ],
+
+            [
+                "texto" => "Extintor de CO₂",
+                "img" => "co2.jpg"
+            ],
+
+            [
+                "texto" => "Extintor de areia",
+                "img" => "areia.jpg"
+            ]
+
         ],
-        1
+
+        2
+
     ),
 
     new Pergunta(
-        "Quem mordeu o Scott?",
+
+        "Qual atitude deve ser evitada durante uma evacuação?",
+
         [
-            ["texto" => "Derek", "img" => "derek.jpg"],
-            ["texto" => "Peter", "img" => "peter.jpg"],
-            ["texto" => "Stiles", "img" => "stiles.jpg"],
-            ["texto" => "Lydia", "img" => "lydia.jpg"]
+
+            [
+                "texto" => "Seguir orientações da brigada",
+                "img" => "brigada.jpg"
+            ],
+
+            [
+                "texto" => "Correr e empurrar pessoas",
+                "img" => "empurrar.jpg"
+            ],
+
+            [
+                "texto" => "Manter a calma",
+                "img" => "calma.jpg"
+            ],
+
+            [
+                "texto" => "Usar saídas de emergência",
+                "img" => "saida.jpg"
+            ]
+
         ],
+
         1
+
     ),
 
     new Pergunta(
-        "Qual o nome da cidade?",
+
+        "Para que serve a brigada de incêndio?",
+
         [
-            ["texto" => "Beacon Hills", "img" => "cidade.jpg"],
-            ["texto" => "Riverdale", "img" => "cidade.jpg"],
-            ["texto" => "Mystic Falls", "img" => "cidade.jpg"],
-            ["texto" => "Gotham", "img" => "cidade.jpg"]
+
+            [
+                "texto" => "Prevenir e combater incêndios",
+                "img" => "brigada.jpg"
+            ],
+
+            [
+                "texto" => "Realizar manutenção elétrica",
+                "img" => "manutencao.jpg"
+            ],
+
+            [
+                "texto" => "Fiscalizar produtividade",
+                "img" => "produtividade.jpg"
+            ],
+
+            [
+                "texto" => "Controlar visitantes",
+                "img" => "visitante.jpg"
+            ]
+
         ],
+
         0
+
     ),
 
     new Pergunta(
-        "Scott se torna qual tipo de lobisomem?",
+
+        "Qual é a função da sinalização de emergência?",
+
         [
-            ["texto" => "Alpha", "img" => "scott.jpg"],
-            ["texto" => "Beta", "img" => "scott.jpg"],
-            ["texto" => "Omega", "img" => "scott.jpg"],
-            ["texto" => "Humano", "img" => "scott.jpg"]
+
+            [
+                "texto" => "Decorar ambientes",
+                "img" => "decoracao.jpg"
+            ],
+
+            [
+                "texto" => "Indicar rotas e equipamentos",
+                "img" => "sinalizacao.jpg"
+            ],
+
+            [
+                "texto" => "Organizar setores",
+                "img" => "setores.jpg"
+            ],
+
+            [
+                "texto" => "Identificar funcionários",
+                "img" => "funcionarios.jpg"
+            ]
+
         ],
-        0
+
+        1
+
     )
-
 ];

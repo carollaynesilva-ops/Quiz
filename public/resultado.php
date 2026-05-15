@@ -7,110 +7,202 @@ $erros = $total - $acertos;
 
 $tema = $_SESSION['tema'] ?? 'default';
 
-// mensagens
-if ($acertos == $total && $total > 0) {
-    $mensagem = "Perfeito. Você dominou esse tema.";
-} elseif ($acertos >= $total / 2) {
-    $mensagem = "Nada mal. Você está no caminho certo.";
-} else {
-    $mensagem = "Ok… talvez assistir/rever o tema ajude.";
-}
-
-
-
 $porcentagem = $total > 0 ? ($acertos / $total) * 100 : 0;
 
 $titulo = "";
 $mensagem = "";
 
-// HARRY POTTER
-if ($tema === "harry") {
+/* ========================= */
+/* PRIMEIROS SOCORROS */
+/* ========================= */
+
+if ($tema === "primeirossocorros") {
 
     if ($porcentagem == 100) {
-        $titulo = "Mestre de Hogwarts";
-        $mensagem = "Dumbledore ficaria orgulhoso.";
+
+        $titulo = "Socorrista de Elite";
+        $mensagem = "Você demonstrou excelente preparo.";
     } elseif ($porcentagem >= 70) {
-        $titulo = "Bruxo Avançado";
-        $mensagem = "Você domina bem a magia.";
+
+        $titulo = "Atendimento Eficiente";
+        $mensagem = "Você conhece bem os procedimentos.";
     } elseif ($porcentagem >= 40) {
-        $titulo = "Estudante de Hogwarts";
-        $mensagem = "Ainda tem o que aprender.";
+
+        $titulo = "Em Treinamento";
+        $mensagem = "Você já possui uma boa base.";
     } else {
-        $titulo = "Trouxa";
-        $mensagem = "Talvez magia não seja seu forte.";
+
+        $titulo = "Precisa Revisar";
+        $mensagem = "Primeiros socorros exigem atenção.";
     }
 }
 
-// BARBIE
-elseif ($tema === "barbie") {
+/* ========================= */
+/* EPI */
+/* ========================= */ elseif ($tema === "epi") {
 
     if ($porcentagem == 100) {
-        $titulo = "Barbie Suprema";
-        $mensagem = "Perfeita em todos os aspectos.";
+
+        $titulo = "Especialista em Segurança";
+        $mensagem = "Uso de EPIs dominado com excelência.";
     } elseif ($porcentagem >= 70) {
-        $titulo = "Barbie Estilosa";
-        $mensagem = "Você arrasa.";
+
+        $titulo = "Profissional Consciente";
+        $mensagem = "Você entende bem a importância dos EPIs.";
     } elseif ($porcentagem >= 40) {
-        $titulo = "Barbie em evolução";
-        $mensagem = "Quase lá.";
+
+        $titulo = "Conhecimento Básico";
+        $mensagem = "Ainda existem pontos para reforçar.";
     } else {
-        $titulo = "Barbie iniciante";
-        $mensagem = "Dá pra melhorar esse look.";
+
+        $titulo = "Atenção à Segurança";
+        $mensagem = "Revisar os EPIs é fundamental.";
     }
 }
 
-// TEEN WOLF
-elseif ($tema === "teenwolf") {
+/* ========================= */
+/* LGPD */
+/* ========================= */ elseif ($tema === "lgpd") {
 
     if ($porcentagem == 100) {
-        $titulo = "Alpha Supremo";
-        $mensagem = "Liderança total.";
+
+        $titulo = "Proteção Total";
+        $mensagem = "Você domina segurança e tecnologia.";
     } elseif ($porcentagem >= 70) {
-        $titulo = "Beta Forte";
-        $mensagem = "Você é respeitado.";
+
+        $titulo = "Usuário Consciente";
+        $mensagem = "Bom conhecimento digital.";
     } elseif ($porcentagem >= 40) {
-        $titulo = "Beta iniciante";
-        $mensagem = "Ainda aprendendo a controlar.";
+
+        $titulo = "Em Evolução";
+        $mensagem = "Continue reforçando a segurança digital.";
     } else {
-        $titulo = "Humano perdido";
-        $mensagem = "Nem entrou na alcateia.";
+
+        $titulo = "Risco Digital";
+        $mensagem = "Talvez seja melhor não clicar em links suspeitos.";
     }
 }
 
+/* ========================= */
+/* INCÊNDIO */
+/* ========================= */ elseif ($tema === "incendio") {
 
+    if ($porcentagem == 100) {
+
+        $titulo = "Brigadista Master";
+        $mensagem = "Excelente controle em situações de emergência.";
+    } elseif ($porcentagem >= 70) {
+
+        $titulo = "Prevenção Eficiente";
+        $mensagem = "Você conhece bem os protocolos.";
+    } elseif ($porcentagem >= 40) {
+
+        $titulo = "Treinamento Inicial";
+        $mensagem = "Ainda há procedimentos para revisar.";
+    } else {
+
+        $titulo = "Alerta de Emergência";
+        $mensagem = "A brigada talvez esteja preocupada com você.";
+    }
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
+
     <meta charset="UTF-8">
+
     <title>Resultado</title>
 
     <link rel="stylesheet" href="assets/css/resultado.css">
-    <link rel="stylesheet" href="assets/css/<?= $tema ?>.css">
+
 </head>
 
-<body class="resultado <?= $tema ?>">
+<body class="<?= $tema ?>">
 
-    <div class="resultado-box">
-        
+    <!-- MENU -->
 
-        <h1>Resultado Final</h1>
+    <header class="menu">
 
-        <h2 class="titulo"><?= $titulo ?></h2>
-        <p class="mensagem"><?= $mensagem ?></p>
+        <div class="logo">
 
-        <div class="placar">
-            <p><strong>Acertos:</strong> <?= $acertos ?></p>
-            <p><strong>Erros:</strong> <?= $erros ?></p>
+            <img src="assets/img/senai.png" alt="SENAI">
+
+            <div class="logo-text">
+
+                <h2>SYS.<span>RES</span></h2>
+
+                <span>RESULTADO DO TREINAMENTO</span>
+
+            </div>
+
         </div>
 
-        <p class="mensagem"><?= $mensagem ?></p>
+    </header>
 
-        <a href="index.php" class="btn-voltar">Jogar novamente</a>
+    <!-- CONTEÚDO -->
 
-    </div>
+    <main class="resultado-wrapper">
+
+        <div class="resultado-box">
+
+            <h1>RESULTADO FINAL</h1>
+
+            <h2 class="titulo">
+
+                <?= $titulo ?>
+
+            </h2>
+
+            <p class="mensagem">
+
+                <?= $mensagem ?>
+
+            </p>
+
+            <!-- PLACAR -->
+
+            <div class="placar">
+
+                <p>
+
+                    <strong>Acertos</strong>
+
+                    <?= $acertos ?>
+
+                </p>
+
+                <p>
+
+                    <strong>Erros</strong>
+
+                    <?= $erros ?>
+
+                </p>
+
+                <p>
+
+                    <strong>Aproveitamento</strong>
+
+                    <?= round($porcentagem) ?>%
+
+                </p>
+
+            </div>
+
+            <!-- BOTÃO -->
+
+            <a href="index.php" class="btn-voltar">
+
+                Voltar ao início
+
+            </a>
+
+        </div>
+
+    </main>
 
 </body>
 
