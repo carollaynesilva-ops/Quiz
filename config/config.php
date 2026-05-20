@@ -1,9 +1,8 @@
 <?php
+
 session_start();
 
-// reset opcional
-if (isset($_GET['reset'])) {
-    session_destroy();
-    header("Location: index.php");
-    exit;
-} 
+define('HOST','127.0.0.1:3308');
+define('DBNAME','sysres');
+define('USER','root');
+define('PASSWORD','');

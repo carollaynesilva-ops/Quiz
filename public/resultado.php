@@ -1,6 +1,32 @@
 <?php
 require_once '../config/config.php';
 
+
+
+//se alguem tentar acessar essa pagina direto no navegador /resultado.php    não vai conseguir
+if (!isset($_SESSION['usuario_id'])) {
+
+    header("Location: ../index.php");
+
+    exit;
+}
+
+// mapeamento dos temas
+require_once '../app/Classes/Resultado.php';
+
+
+$temaBanco = [
+
+    'epi' => 1,
+    'primeirossocorros' => 2,
+    'lgpd' => 3,
+    'incendio' => 4
+
+];
+
+
+
+
 $acertos = $_SESSION['pontuacao'] ?? 0;
 $total = $_SESSION['indice'] ?? 0;
 $erros = $total - $acertos;
@@ -8,6 +34,24 @@ $erros = $total - $acertos;
 $tema = $_SESSION['tema'] ?? 'default';
 
 $porcentagem = $total > 0 ? ($acertos / $total) * 100 : 0;
+
+// salva resultado no banco
+
+$usuarioId = $_SESSION['usuario_id'];
+
+$temaId = $temaBanco[$tema];
+
+$resultadoObj = new Resultado();
+
+$resultadoObj->salvar(
+
+    $usuarioId,
+    $temaId,
+    $acertos,
+    $erros,
+    $porcentagem
+
+);
 
 $titulo = "";
 $mensagem = "";
@@ -207,5 +251,12 @@ if ($tema === "primeirossocorros") {
 </body>
 
 </html>
+<?php
 
-<?php session_destroy(); ?>
+unset(
+    $_SESSION['pontuacao'],
+    $_SESSION['indice'],
+    $_SESSION['tema']
+);
+
+?>
