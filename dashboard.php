@@ -1,7 +1,6 @@
 <?php
 
 require_once 'config/config.php';
-
 require_once 'app/Classes/Database.php';
 
 if (!isset($_SESSION['usuario_id'])) {
@@ -43,6 +42,36 @@ ORDER BY r.data_realizacao DESC"
 
 $resultados = $sql->fetchAll(PDO::FETCH_ASSOC);
 
+
+/* ESTATÍSTICAS */
+
+$totalTreinamentos = count($resultados);
+
+$media = 0;
+
+if ($totalTreinamentos > 0) {
+
+    $soma = array_sum(
+        array_column(
+            $resultados,
+            'porcentagem'
+        )
+    );
+
+    $media = $soma / $totalTreinamentos;
+}
+
+$funcionarios = array_unique(
+
+    array_column(
+        $resultados,
+        'nome_completo'
+    )
+
+);
+
+$totalFuncionarios = count($funcionarios);
+
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +81,7 @@ $resultados = $sql->fetchAll(PDO::FETCH_ASSOC);
 
     <meta charset="UTF-8">
 
-    <title>SYS.RES | Dashboard</title>
+    <title>Dashboard</title>
 
     <link rel="stylesheet"
         href="login/css/dashboard.css">
@@ -70,16 +99,25 @@ $resultados = $sql->fetchAll(PDO::FETCH_ASSOC);
             <div class="logo-text">
 
                 <h2>SYS.<span>RES</span></h2>
-
                 <span>PAINEL ADMINISTRATIVO</span>
 
             </div>
 
         </div>
 
-        <div class="usuario">
+        <div class="usuario-box">
 
-            <?= $_SESSION['nome'] ?>
+            <span>
+
+                <?= $_SESSION['nome'] ?>
+
+            </span>
+
+            <a href="logout.php">
+
+                Sair
+
+            </a>
 
         </div>
 
@@ -87,6 +125,47 @@ $resultados = $sql->fetchAll(PDO::FETCH_ASSOC);
 
 
     <main class="container">
+
+        <div class="cards">
+
+            <div class="card-info">
+
+                <h3>Funcionários</h3>
+
+                <p>
+
+                    <?= $totalFuncionarios ?>
+
+                </p>
+
+            </div>
+
+            <div class="card-info">
+
+                <h3>Treinamentos</h3>
+
+                <p>
+
+                    <?= $totalTreinamentos ?>
+
+                </p>
+
+            </div>
+
+            <div class="card-info">
+
+                <h3>Média Geral</h3>
+
+                <p>
+
+                    <?= round($media) ?>%
+
+                </p>
+
+            </div>
+
+        </div>
+
 
         <div class="dashboard-box">
 
@@ -96,82 +175,100 @@ $resultados = $sql->fetchAll(PDO::FETCH_ASSOC);
 
             </h1>
 
-            <table>
+            <div class="table-container">
 
-                <thead>
+                <table>
 
-                    <tr>
-
-                        <th>Funcionário</th>
-                        <th>Tema</th>
-                        <th>Acertos</th>
-                        <th>Erros</th>
-                        <th>%</th>
-                        <th>Data</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-                    <?php foreach ($resultados as $resultado): ?>
+                    <thead>
 
                         <tr>
 
-                            <td>
-
-                                <?= $resultado['nome_completo'] ?>
-
-                            </td>
-
-                            <td>
-
-                                <?= $resultado['tema'] ?>
-
-                            </td>
-
-                            <td>
-
-                                <?= $resultado['acertos'] ?>
-
-                            </td>
-
-                            <td>
-
-                                <?= $resultado['erros'] ?>
-
-                            </td>
-
-                            <td>
-
-                                <?= round(
-                                    $resultado['porcentagem']
-                                ) ?>%
-
-                            </td>
-
-                            <td>
-
-                                <?= date(
-
-                                    'd/m/Y H:i',
-
-                                    strtotime(
-                                        $resultado['data_realizacao']
-                                    )
-
-                                ) ?>
-
-                            </td>
+                            <th>Funcionário</th>
+                            <th>Tema</th>
+                            <th>Acertos</th>
+                            <th>Erros</th>
+                            <th>Desempenho</th>
+                            <th>Data</th>
 
                         </tr>
 
-                    <?php endforeach; ?>
+                    </thead>
 
-                </tbody>
+                    <tbody>
 
-            </table>
+                        <?php foreach ($resultados as $r): ?>
+
+                            <tr>
+
+                                <td>
+
+                                    <?= $r['nome_completo'] ?>
+
+                                </td>
+
+                                <td>
+
+                                    <?= $r['tema'] ?>
+
+                                </td>
+
+                                <td>
+
+                                    <?= $r['acertos'] ?>
+
+                                </td>
+
+                                <td>
+
+                                    <?= $r['erros'] ?>
+
+                                </td>
+
+                                <td>
+
+                                    <div class="barra-container">
+
+                                        <div
+                                            class="barra-resultado"
+
+                                            style="width:
+<?= round($r['porcentagem']) ?>%">
+
+                                        </div>
+
+                                        <span>
+
+                                            <?= round($r['porcentagem']) ?>%
+
+                                        </span>
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+
+                                    <?= date(
+
+                                        'd/m/Y H:i',
+
+                                        strtotime(
+                                            $r['data_realizacao']
+                                        )
+
+                                    ) ?>
+
+                                </td>
+
+                            </tr>
+
+                        <?php endforeach; ?>
+
+                    </tbody>
+
+                </table>
+
+            </div>
 
         </div>
 

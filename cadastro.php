@@ -14,7 +14,7 @@ if ($_POST) {
 
         $_POST['nome'],
         $_POST['data'],
-        $_POST['usuario'],
+        $_POST['usuario_id'],
         $_POST['senha']
 
     );
@@ -103,7 +103,7 @@ if ($_POST) {
 
                     <input
                         type="text"
-                        id="usuario"
+                        id="usuario_id"
                         name="usuario"
                         required>
 
