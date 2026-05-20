@@ -1,16 +1,9 @@
 <?php
-require_once '../config/config.php';
+
 
 require_once '../config/config.php';
 
-if (!isset($_SESSION['usuario_id'])) {
 
-    header("Location: ../index.php");
-
-    exit;
-}
-
-session_destroy();
 ?>
 
 
@@ -48,9 +41,19 @@ session_destroy();
 
         </div>
 
-        <button id="themeToggle" class="theme-btn">
-            ☀
-        </button>
+        <div class="acoes-header">
+
+            <button id="themeToggle" class="theme-btn">
+                ☀
+            </button>
+
+            <a href="../logout.php" class="logout-btn">
+
+                Sair
+
+            </a>
+
+        </div>
 
     </header>
 

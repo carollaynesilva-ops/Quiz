@@ -418,3 +418,53 @@ body.light-mode .theme-btn{
 
     border:1px solid rgba(0,0,0,0.08);
 }
+
+/* AGRUPA BOTÕES */
+
+.acoes-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+}
+
+/* BOTÃO SAIR */
+
+.logout-btn{
+
+    text-decoration:none;
+
+    padding:12px 20px;
+
+    border-radius:12px;
+
+    background:#ef4444;
+
+    color:white;
+
+    font-weight:600;
+
+    transition:.3s;
+
+    border:1px solid transparent;
+}
+
+.logout-btn:hover{
+
+    transform:translateY(-2px);
+
+    background:#dc2626;
+
+    box-shadow:
+    0 0 15px rgba(239,68,68,.4);
+}
+
+/* TEMA CLARO */
+
+body.light-mode .logout-btn{
+
+    background:#ef4444;
+    color:white;
+}

@@ -5,6 +5,8 @@ require_once '../app/Classes/Quiz.php';
 require_once '../app/Classes/Pergunta.php';
 require_once '../app/Controllers/QuizController.php';
 
+
+
 // pegar tema
 $temaEscolhido = $_GET['tema'] ?? null;
 
@@ -15,8 +17,12 @@ if (!$temaEscolhido) {
 
 // reset se trocar tema
 if (!isset($_SESSION['tema']) || $_SESSION['tema'] !== $temaEscolhido) {
-    session_destroy();
-    session_start();
+    unset(
+        $_SESSION['pontuacao'],
+        $_SESSION['indice'],
+        $_SESSION['tema']
+    );
+    
     $_SESSION['tema'] = $temaEscolhido;
 }
 

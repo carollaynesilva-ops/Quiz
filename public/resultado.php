@@ -3,13 +3,7 @@ require_once '../config/config.php';
 
 
 
-//se alguem tentar acessar essa pagina direto no navegador /resultado.php    não vai conseguir
-if (!isset($_SESSION['usuario_id'])) {
 
-    header("Location: ../index.php");
-
-    exit;
-}
 
 // mapeamento dos temas
 require_once '../app/Classes/Resultado.php';

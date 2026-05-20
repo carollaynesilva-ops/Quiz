@@ -17,7 +17,8 @@ class Usuario
         $nome,
         $data,
         $usuario,
-        $senha
+        $senha,
+        $tipo = 'funcionario'
     ) {
 
         $senhaHash = password_hash(
@@ -28,20 +29,22 @@ class Usuario
         $sql = $this->conn->prepare(
 
             "INSERT INTO usuarios
-        (
-            nome_completo,
-            data_nascimento,
-            usuario,
-            senha
-        )
+    (
+        nome_completo,
+        data_nascimento,
+        usuario,
+        senha,
+        tipo
+    )
 
-        VALUES
-        (
-            :nome,
-            :data,
-            :usuario,
-            :senha
-        )"
+    VALUES
+    (
+        :nome,
+        :data,
+        :usuario,
+        :senha,
+        :tipo
+    )"
 
         );
 
@@ -50,7 +53,8 @@ class Usuario
             ':nome' => $nome,
             ':data' => $data,
             ':usuario' => $usuario,
-            ':senha' => $senhaHash
+            ':senha' => $senhaHash,
+            ':tipo' => $tipo
 
         ]);
     }

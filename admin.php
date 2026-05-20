@@ -1,3 +1,42 @@
+<?php
+
+require_once 'config/config.php';
+
+require_once 'app/Classes/Database.php';
+
+require_once 'app/Classes/Usuario.php';
+
+$erro = "";
+
+if ($_POST) {
+
+    $usuarioObj = new Usuario();
+
+    $dados = $usuarioObj->login(
+
+        "admin",
+        $_POST['senha']
+
+    );
+    var_dump($dados);
+    if ($dados && $dados['tipo'] == "admin") {
+
+        $_SESSION['usuario_id'] = $dados['id'];
+
+        $_SESSION['nome'] = $dados['nome_completo'];
+
+        $_SESSION['tipo'] = $dados['tipo'];
+
+        header("Location: dashboard.php");
+
+        exit;
+    }
+
+    $erro = "Senha incorreta";
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -43,7 +82,7 @@
 
             </p>
 
-            <form id="adminForm">
+            <form method="POST">
 
                 <div class="campo">
 
@@ -51,7 +90,7 @@
 
                     <input
                         type="password"
-                        id="adminSenha"
+                        name="senha"
                         placeholder="Digite a senha"
                         required>
 
@@ -65,13 +104,22 @@
 
             </form>
 
+            <?php if ($erro): ?>
+
+                <p id="mensagemErro">
+
+                    <?= $erro ?>
+
+                </p>
+
+            <?php endif; ?>
+
             <p id="mensagemErro"></p>
 
         </div>
 
     </main>
 
-    <script src="login/js/admin.js"></script>
 
 </body>
 
