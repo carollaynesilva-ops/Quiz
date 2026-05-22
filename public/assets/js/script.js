@@ -36,27 +36,48 @@ buttons.forEach(btn => {
     });
 });
 
-//TEMA CLARO OU ESCURO
+// TEMA CLARO / ESCURO
 
 document.addEventListener('DOMContentLoaded', () => {
 
     const themeBtn = document.getElementById('themeToggle');
 
-    themeBtn.addEventListener('click', () => {
+    // recupera tema salvo
+    const temaSalvo = localStorage.getItem('tema');
 
-        document.body.classList.toggle('light-mode');
+    if (temaSalvo === 'claro') {
 
-        // troca ícone
-        if(document.body.classList.contains('light-mode')){
+        document.body.classList.add('light-mode');
 
+        if (themeBtn) {
             themeBtn.innerHTML = '🌙';
-
-        }else{
-
-            themeBtn.innerHTML = '☀';
-
         }
 
-    });
+    }
+
+    // clique botão
+    if (themeBtn) {
+
+        themeBtn.addEventListener('click', () => {
+
+            document.body.classList.toggle('light-mode');
+
+            if (document.body.classList.contains('light-mode')) {
+
+                localStorage.setItem('tema', 'claro');
+
+                themeBtn.innerHTML = '🌙';
+
+            } else {
+
+                localStorage.setItem('tema', 'escuro');
+
+                themeBtn.innerHTML = '☀';
+
+            }
+
+        });
+
+    }
 
 });

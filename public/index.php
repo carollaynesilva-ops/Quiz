@@ -79,7 +79,7 @@ require_once '../config/config.php';
         <section class="temas">
 
             <!-- PRIMEIROS SOCORROS -->
-            <a href="quiz.php?tema=primeirossocorros" class="card">
+            <a href="curso.php?tema=primeirossocorros" class="card">
 
                 <img src="assets/img/primeiros-socorros.jpg" alt="Primeiros Socorros">
 
@@ -100,7 +100,7 @@ require_once '../config/config.php';
             </a>
 
             <!-- EPI -->
-            <a href="quiz.php?tema=epi" class="card">
+            <a href="curso.php?tema=epi" class="card">
 
                 <img src="assets/img/epi.jpg" alt="EPI">
 
@@ -121,7 +121,7 @@ require_once '../config/config.php';
             </a>
 
             <!-- LGPD -->
-            <a href="quiz.php?tema=lgpd" class="card">
+            <a href="curso.php?tema=lgpd" class="card">
 
                 <img src="assets/img/lgpd.png" alt="LGPD">
 
@@ -142,7 +142,7 @@ require_once '../config/config.php';
             </a>
 
             <!-- INCÊNDIO -->
-            <a href="quiz.php?tema=incendio" class="card">
+            <a href="curso.php?tema=incendio" class="card">
 
                 <img src="assets/img/incendio.png" alt="Incêndio">
 

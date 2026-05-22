@@ -155,7 +155,7 @@ if ($tema === "primeirossocorros") {
     <title>Resultado</title>
 
     <link rel="stylesheet" href="assets/css/resultado.css">
-
+    
 </head>
 
 <body class="<?= $tema ?>">
@@ -170,7 +170,7 @@ if ($tema === "primeirossocorros") {
 
             <div class="logo-text">
 
-                <h2>SYS.<span>RES</span></h2>
+                <h2>Corporate Training</h2>
 
                 <span>RESULTADO DO TREINAMENTO</span>
 
@@ -241,7 +241,7 @@ if ($tema === "primeirossocorros") {
         </div>
 
     </main>
-
+    <script src="assets/js/script.js"></script>
 </body>
 
 </html>

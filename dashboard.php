@@ -98,7 +98,7 @@ $totalFuncionarios = count($funcionarios);
 
             <div class="logo-text">
 
-                <h2>SYS.<span>RES</span></h2>
+                <h2>Corporate Training</h2>
                 <span>PAINEL ADMINISTRATIVO</span>
 
             </div>

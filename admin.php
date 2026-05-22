@@ -44,10 +44,10 @@ if ($_POST) {
 
     <meta charset="UTF-8">
 
-    <title>SYS.RES | Admin</title>
+    <title>Corporate Training | Admin</title>
 
     <link rel="stylesheet" href="login/css/admin.css">
-
+    
 </head>
 
 <body>
@@ -67,7 +67,7 @@ if ($_POST) {
             </div>
 
         </div>
-
+        
     </header>
 
     <main class="container">

@@ -14,7 +14,7 @@ if ($_POST) {
 
         $_POST['nome'],
         $_POST['data'],
-        $_POST['usuario_id'],
+        $_POST['usuario'],
         $_POST['senha']
 
     );
@@ -49,7 +49,7 @@ if ($_POST) {
 
             <div class="logo-text">
 
-                <h2>SYS.<span>RES</span></h2>
+                <h2>Corporate Training</h2>
 
                 <span>CADASTRO DE USUÁRIO</span>
 
@@ -103,7 +103,7 @@ if ($_POST) {
 
                     <input
                         type="text"
-                        id="usuario_id"
+                        id="usuario"
                         name="usuario"
                         required>
 
