@@ -3,7 +3,7 @@
 require_once '../config/config.php';
 require_once '../app/Classes/Database.php';
 
-if (!isset($_SESSION['usuario_id'])) {
+if (!isset($_SESSION['usuario'])) {
 
     header("Location:../index.php");
     exit;
