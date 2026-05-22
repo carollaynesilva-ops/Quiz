@@ -119,6 +119,12 @@ $totalFuncionarios = count($funcionarios);
 
             </a>
 
+            <a href="admin_quiz.php" class="btn-criar">
+
+                Criar Quiz
+
+            </a>
+
         </div>
 
     </header>
