@@ -13,7 +13,7 @@ if ($_POST) {
 
     $dados = $usuarioObj->login(
 
-        $_POST['usuario_id'],
+        $_POST['usuario'],
         $_POST['senha']
 
     );
@@ -21,7 +21,7 @@ if ($_POST) {
     if ($dados) {
 
         // salva dados do usuário na sessão
-        $_SESSION['usuario_id'] = $dados['id'];
+        $_SESSION['usuario'] = $dados['id'];
 
         $_SESSION['nome'] = $dados['nome_completo'];
 
@@ -93,7 +93,7 @@ if ($_POST) {
 
                     <input
                         type="text"
-                        name="usuario_id"
+                        name="usuario"
                         placeholder="Digite seu usuário"
                         required>
 
