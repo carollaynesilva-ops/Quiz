@@ -1,8 +1,24 @@
 <?php
 
 require_once '../config/config.php';
-
 require_once '../app/Classes/Database.php';
+
+
+$conn = Database::conectar();
+
+$sql = $conn->query(
+
+    "SELECT *
+FROM quizzes
+ORDER BY criado_em DESC"
+
+);
+
+$novosQuizzes = $sql->fetchAll(
+    PDO::FETCH_ASSOC
+);
+
+
 
 if (!isset($_SESSION['usuario'])) {
 
@@ -187,6 +203,84 @@ $quizzes = $sql->fetchAll(
 
         </section>
 
+
+        <!-- OUTROS CURSOS -->
+
+        <section class="outros-wrapper">
+
+            <div class="outros-container">
+
+                <div class="titulo-cursos">
+
+                    <h2>Outros Disponíveis</h2>
+
+                    <span>
+                        Treinamentos adicionados pela empresa
+                    </span>
+
+                </div>
+
+                <div class="cards-novos">
+
+                    <?php foreach ($novosQuizzes as $quiz): ?>
+
+                        <div class="novo-card">
+
+                            <div class="novo-img">
+
+                                <?php if (!empty($quiz['imagem'])): ?>
+
+                                    <img
+                                        src="assets/img/<?= $quiz['imagem'] ?>"
+                                        alt="">
+
+                                <?php else: ?>
+
+                                    <img
+                                        src="assets/img/default.jpg"
+                                        alt="">
+
+                                <?php endif; ?>
+
+                            </div>
+
+                            <div class="novo-conteudo">
+
+                                <h3>
+
+                                    <?= $quiz['titulo'] ?>
+
+                                </h3>
+
+                                <p>
+
+                                    <?= substr(
+                                        $quiz['curso'],
+                                        0,
+                                        80
+                                    ) ?>...
+
+                                </p>
+
+                                <a
+                                    href="curso.php?id=<?= $quiz['id'] ?>"
+                                    class="btn-curso">
+
+                                    Acessar treinamento
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    <?php endforeach; ?>
+
+                </div>
+
+            </div>
+
+        </section>
     </main>
     <script src="assets/js/script.js"></script>
 </body>

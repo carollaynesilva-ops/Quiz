@@ -409,3 +409,122 @@ body.light-mode .theme-btn {
         padding: 25px;
     }
 }
+
+
+/* ===================== */
+/* QUIZ DINÂMICO */
+/* ===================== */
+
+.opcoes {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 20px;
+
+}
+
+.btn-opcao {
+
+    min-height: 110px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+}
+
+.texto-opcao {
+
+    padding: 22px;
+
+    font-size: 18px;
+
+    font-weight: 500;
+
+    line-height: 1.5;
+
+    text-align: center;
+}
+
+/* efeito ao clicar */
+
+.btn-opcao.clicado {
+
+    border: 2px solid #38bdf8;
+
+    transform: scale(0.98);
+
+}
+
+/* barra */
+
+.progresso {
+
+    transition: .5s;
+}
+
+/* timer */
+
+.timer {
+
+    box-shadow:
+
+        0 0 20px rgba(56,
+            189,
+            248,
+            .2);
+
+}
+
+/* ===================== */
+/* TEMA CLARO */
+/* ===================== */
+
+body.light-mode .quiz-container {
+
+    background: white;
+
+}
+
+body.light-mode .btn-opcao {
+
+    background: #f8fafc;
+
+    color: #111827;
+
+    border: 1px solid rgba(0,
+            0,
+            0,
+            .08);
+
+}
+
+body.light-mode .btn-opcao:hover {
+
+    border-color: #38bdf8;
+
+}
+
+body.light-mode .texto-opcao {
+
+    color: #111827;
+
+}
+
+body.light-mode .barra {
+
+    background: #e2e8f0;
+
+}
+
+body.light-mode .timer {
+
+    background: white;
+
+    color: #111827;
+
+}

@@ -211,3 +211,26 @@ body.light-mode .btn-iniciar {
 
     background: #dc2626;
 }
+
+.curso-imagem {
+
+    width: 100%;
+
+    height: 280px;
+
+    margin: 25px 0;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+}
+
+.curso-imagem img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+}

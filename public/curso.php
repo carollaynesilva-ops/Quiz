@@ -1,23 +1,81 @@
 <?php
 
 require_once '../config/config.php';
+require_once '../app/Classes/Database.php';
 
+$curso = null;
 $tema = $_GET['tema'] ?? null;
+$id = $_GET['id'] ?? null;
 
-if (!$tema) {
+/* ========================= */
+/* CURSOS FIXOS */
+/* ========================= */
+
+if ($tema) {
+
+    $arquivoCurso = "../app/Cursos/{$tema}.php";
+
+    if (!file_exists($arquivoCurso)) {
+
+        die("Curso não encontrado");
+    }
+
+    $curso = require $arquivoCurso;
+}
+
+/* ========================= */
+/* CURSOS DO ADMIN */
+/* ========================= */ elseif ($id) {
+
+    $conn = Database::conectar();
+
+    $sql = $conn->prepare(
+
+        "SELECT *
+    FROM quizzes
+    WHERE id=:id"
+
+    );
+
+    $sql->execute([
+
+        ':id' => $id
+
+    ]);
+
+    $quiz = $sql->fetch(PDO::FETCH_ASSOC);
+
+    if (!$quiz) {
+
+        die("Curso não encontrado");
+    }
+
+    $curso = [
+
+        'titulo' => $quiz['titulo'],
+
+        'descricao' => 'Treinamento criado pela empresa.',
+
+        'conteudo' => [
+
+            [
+
+                'titulo' => 'Conteúdo',
+
+                'texto' => $quiz['curso']
+
+            ]
+
+        ],
+
+        'imagem' => $quiz['imagem']
+
+    ];
+} else {
 
     header("Location:index.php");
     exit;
 }
-
-$arquivoCurso = "../app/Cursos/{$tema}.php";
-
-if (!file_exists($arquivoCurso)) {
-
-    die("Curso não encontrado");
-}
-
-$curso = require $arquivoCurso;
 
 ?>
 
@@ -35,8 +93,13 @@ $curso = require $arquivoCurso;
 
     </title>
 
-    <link rel="stylesheet"href="assets/css/curso.css">
-    <script src="assets/js/script.js"></script>
+    <link rel="stylesheet"
+        href="assets/css/curso.css">
+
+    <script
+        src="assets/js/script.js">
+    </script>
+
 </head>
 
 <body>
@@ -49,7 +112,11 @@ $curso = require $arquivoCurso;
 
             <div class="logo-text">
 
-                <h2>Corporate Training</h2>
+                <h2>
+
+                    Corporate Training
+
+                </h2>
 
                 <span>
 
@@ -79,6 +146,18 @@ $curso = require $arquivoCurso;
 
             </p>
 
+            <?php if (isset($curso['imagem']) && !empty($curso['imagem'])): ?>
+
+                <div class="curso-imagem">
+
+                    <img
+                        src="assets/img/<?= $curso['imagem'] ?>"
+                        alt="">
+
+                </div>
+
+            <?php endif; ?>
+
             <?php foreach ($curso['conteudo'] as $bloco): ?>
 
                 <div class="aula">
@@ -91,7 +170,9 @@ $curso = require $arquivoCurso;
 
                     <p>
 
-                        <?= $bloco['texto'] ?>
+                        <?= nl2br(
+                            $bloco['texto']
+                        ) ?>
 
                     </p>
 
@@ -99,15 +180,27 @@ $curso = require $arquivoCurso;
 
             <?php endforeach; ?>
 
-            <a
+            <?php if ($tema): ?>
 
-                href="quiz.php?tema=<?= $tema ?>"
+                <a
+                    href="quiz.php?tema=<?= $tema ?>"
+                    class="btn-iniciar">
 
-                class="btn-iniciar">
+                    Iniciar Avaliação
 
-                Iniciar Avaliação
+                </a>
 
-            </a>
+            <?php else: ?>
+
+                <a
+                    href="quiz_dinamico.php?id=<?= $_GET['id'] ?>"
+                    class="btn-iniciar">
+
+                    Iniciar Avaliação
+
+                </a>
+
+            <?php endif; ?>
 
         </div>
 

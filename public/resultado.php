@@ -31,20 +31,15 @@ $porcentagem = $total > 0 ? ($acertos / $total) * 100 : 0;
 
 // salva resultado no banco
 
-$usuarioId = $_SESSION['usuario_id'] ?? null;
-
-if (!$usuarioId) {
-
-    header("Location:../index.php");
-    exit;
-}
+$usuarioId = $_SESSION['usuario_id'];
 
 $temaId = $temaBanco[$tema] ?? null;
 
-if (!$temaId) {
+if(!$temaId){
 
     header("Location:index.php");
     exit;
+
 }
 $resultadoObj = new Resultado();
 
@@ -166,7 +161,7 @@ if ($tema === "primeirossocorros") {
     <title>Resultado</title>
 
     <link rel="stylesheet" href="assets/css/resultado.css">
-
+    
 </head>
 
 <body class="<?= $tema ?>">
