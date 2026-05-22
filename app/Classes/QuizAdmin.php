@@ -121,4 +121,21 @@ class QuizAdmin
 
         ]);
     }
+
+    public function excluirQuiz($id)
+    {
+
+        $sql = $this->conn->prepare(
+
+            "DELETE FROM quizzes
+        WHERE id=:id"
+
+        );
+
+        return $sql->execute([
+
+            ':id' => $id
+
+        ]);
+    }
 }

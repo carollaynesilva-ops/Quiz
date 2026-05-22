@@ -72,6 +72,16 @@ $funcionarios = array_unique(
 
 $totalFuncionarios = count($funcionarios);
 
+$quizzes = $conn->query(
+
+    "SELECT *
+FROM quizzes
+ORDER BY criado_em DESC"
+
+)->fetchAll(
+    PDO::FETCH_ASSOC
+);
+
 ?>
 
 <!DOCTYPE html>
@@ -280,6 +290,44 @@ $totalFuncionarios = count($funcionarios);
 
     </main>
 
+    <div class="quizzes-box">
+
+        <h2>
+
+            Gerenciar Treinamentos
+
+        </h2>
+
+        <?php foreach ($quizzes as $quiz): ?>
+
+            <div class="quiz-item">
+
+                <div>
+
+                    <strong>
+
+                        <?= $quiz['titulo'] ?>
+
+                    </strong>
+
+                </div>
+
+                <a
+                    href="excluir_quiz.php?id=<?= $quiz['id'] ?>"
+                    class="btn-excluir"
+                    onclick="return confirm(
+'Excluir este treinamento?'
+)">
+
+                    Excluir
+
+                </a>
+
+            </div>
+
+        <?php endforeach; ?>
+
+    </div>
 </body>
 
 </html>

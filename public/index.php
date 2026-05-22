@@ -1,10 +1,33 @@
 <?php
 
-
 require_once '../config/config.php';
 
+require_once '../app/Classes/Database.php';
+
+if (!isset($_SESSION['usuario_id'])) {
+
+    header("Location:../index.php");
+
+    exit;
+}
+
+$conn = Database::conectar();
+
+$sql = $conn->query(
+
+    "SELECT *
+FROM quizzes
+ORDER BY criado_em DESC"
+
+);
+
+$quizzes = $sql->fetchAll(
+    PDO::FETCH_ASSOC
+);
 
 ?>
+
+
 
 
 

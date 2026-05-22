@@ -60,7 +60,7 @@ if ($_POST) {
 
             <div class="logo-text">
 
-                <h2>SYS.<span>RES</span></h2>
+                <h2>Corporate Training</h2>
 
                 <span>ÁREA RESTRITA</span>
 
