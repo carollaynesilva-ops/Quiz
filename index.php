@@ -20,7 +20,7 @@ if ($_POST) {
     if ($dados) {
 
         // salva dados do usuário na sessão
-        $_SESSION['usuario_id'] = $dados['id'];
+        $_SESSION['usuario'] = $dados['id'];
 
         $_SESSION['nome'] = $dados['nome_completo'];
 

@@ -3,24 +3,27 @@
 require_once '../config/config.php';
 require_once '../app/Classes/Database.php';
 
+if (!isset($_SESSION['usuario_id'])) {
+
+    header("Location:../index.php");
+    exit;
+}
+
 if (!isset($_GET['id'])) {
 
     header("Location:index.php");
     exit;
 }
 
-$quizId = $_GET['id'];
+$quizId = (int)$_GET['id'];
 
 $conn = Database::conectar();
 
-/* iniciar sessão do quiz */
+/* iniciar sessão */
 
-if (
-    !isset($_SESSION['quiz_' . $quizId])
-) {
+if (!isset($_SESSION['quiz_' . $quizId])) {
 
     $_SESSION['quiz_' . $quizId] = 0;
-
     $_SESSION['acertos_' . $quizId] = 0;
 }
 
@@ -40,30 +43,31 @@ $sql->execute([
 
 ]);
 
-$perguntas = $sql->fetchAll(
-    PDO::FETCH_ASSOC
-);
+$perguntas = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-$total = count(
-    $perguntas
-);
 
-$indice =
-    $_SESSION['quiz_' . $quizId];
+/* VERIFICA SE EXISTEM PERGUNTAS */
+
+if (empty($perguntas)) {
+
+    die("Este quiz ainda não possui perguntas cadastradas.");
+}
+
+$total = count($perguntas);
+
+$indice = $_SESSION['quiz_' . $quizId];
+
 
 /* terminou */
 
-if (
-    $indice >= $total
-) {
+if ($indice >= $total) {
 
     $_SESSION['pontuacao'] =
         $_SESSION['acertos_' . $quizId];
 
     $_SESSION['indice'] = $total;
 
-    $_SESSION['quiz_finalizado'] =
-        $quizId;
+    $_SESSION['quiz_finalizado'] = $quizId;
 
     header(
         "Location:resultado_dinamico.php"
@@ -72,13 +76,11 @@ if (
     exit;
 }
 
-/* pergunta atual */
-
 $perguntaAtual =
     $perguntas[$indice];
 
 
-/* pegar opções */
+/* opções */
 
 $sql = $conn->prepare(
 
@@ -90,39 +92,26 @@ WHERE pergunta_id=:id"
 
 $sql->execute([
 
-    ':id' =>
-    $perguntaAtual['id']
+    ':id' => $perguntaAtual['id']
 
 ]);
 
 $opcoes =
-    $sql->fetchAll(
-        PDO::FETCH_ASSOC
-    );
+    $sql->fetchAll(PDO::FETCH_ASSOC);
 
-/* respondeu */
 
-if (
-    $_POST &&
-    isset(
-        $_POST['resposta']
-    )
-) {
+/* resposta */
 
-    $resposta =
-        $_POST['resposta'];
+if ($_POST && isset($_POST['resposta'])) {
 
-    foreach (
-        $opcoes
-        as $opcao
-    ) {
+    $resposta = $_POST['resposta'];
+
+    foreach ($opcoes as $opcao) {
 
         if (
-
             $opcao['id'] == $resposta
             &&
-            $opcao['correta']
-
+            $opcao['correta'] == 1
         ) {
 
             $_SESSION['acertos_' . $quizId]++;
@@ -132,14 +121,11 @@ if (
     $_SESSION['quiz_' . $quizId]++;
 
     header(
-
         "Location:quiz_dinamico.php?id=" . $quizId
-
     );
 
     exit;
 }
-
 ?>
 
 <!DOCTYPE html>
