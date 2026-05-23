@@ -125,10 +125,86 @@ class QuizAdmin
     public function excluirQuiz($id)
     {
 
+        /* apagar resultados */
+
+        $sql = $this->conn->prepare(
+
+            "DELETE FROM resultados
+    WHERE quiz_id=:id"
+
+        );
+
+        $sql->execute([
+
+            ':id' => $id
+
+        ]);
+
+
+        /* pegar perguntas */
+
+        $sql = $this->conn->prepare(
+
+            "SELECT id
+    FROM perguntas
+    WHERE quiz_id=:id"
+
+        );
+
+        $sql->execute([
+
+            ':id' => $id
+
+        ]);
+
+        $perguntas =
+            $sql->fetchAll(
+                PDO::FETCH_ASSOC
+            );
+
+
+        /* apagar opções */
+
+        foreach ($perguntas as $p) {
+
+            $deleteOpcoes =
+                $this->conn->prepare(
+
+                    "DELETE FROM opcoes
+        WHERE pergunta_id=:id"
+
+                );
+
+            $deleteOpcoes->execute([
+
+                ':id' => $p['id']
+
+            ]);
+        }
+
+
+        /* apagar perguntas */
+
+        $sql = $this->conn->prepare(
+
+            "DELETE FROM perguntas
+    WHERE quiz_id=:id"
+
+        );
+
+        $sql->execute([
+
+            ':id' => $id
+
+        ]);
+
+
+        /* apagar quiz */
+
         $sql = $this->conn->prepare(
 
             "DELETE FROM quizzes
-        WHERE id=:id"
+    WHERE id=:id"
 
         );
 
