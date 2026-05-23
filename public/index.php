@@ -20,7 +20,7 @@ $novosQuizzes = $sql->fetchAll(
 
 
 
-if (!isset($_SESSION['usuario'])) {
+if (!isset($_SESSION['usuario_id'])) {
 
     header("Location:../index.php");
 

@@ -31,7 +31,7 @@ $porcentagem = $total > 0 ? ($acertos / $total) * 100 : 0;
 
 // salva resultado no banco
 
-$usuarioId = $_SESSION['usuario'];
+$usuarioId = $_SESSION['usuario_id'];
 
 $temaId = $temaBanco[$tema] ?? null;
 

@@ -5,7 +5,7 @@ require_once '../app/Classes/Database.php';
 require_once '../app/Classes/Resultado.php';
 
 if (
-    !isset($_SESSION['usuario'])
+    !isset($_SESSION['usuario_id'])
 ) {
 
     header("Location:../index.php");
@@ -62,6 +62,13 @@ $quiz =
 
 $resultadoObj =
     new Resultado();
+
+if (!isset($_SESSION['usuario_id'])) {
+
+    die("Sessão do usuário perdida: <pre>"
+        . print_r($_SESSION, true) .
+        "</pre>");
+}
 
 $resultadoObj->salvar(
 
