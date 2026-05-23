@@ -14,43 +14,66 @@ class Resultado
     }
 
     public function salvar(
-
         $usuarioId,
-        $temaId,
+        $id,
         $acertos,
         $erros,
-        $porcentagem
-
+        $porcentagem,
+        $tipo = 'tema'
     ) {
 
-        $sql = $this->conn->prepare(
+        if ($tipo == 'tema') {
 
-            "INSERT INTO resultados(
+            $sql = $this->conn->prepare(
 
+                "INSERT INTO resultados
+        (
             usuario_id,
             tema_id,
             acertos,
             erros,
             porcentagem
-
         )
 
-        VALUES(
-
+        VALUES
+        (
             :usuario,
-            :tema,
+            :id,
             :acertos,
             :erros,
             :porcentagem
-
         )"
 
-        );
+            );
+        } else {
+
+            $sql = $this->conn->prepare(
+
+                "INSERT INTO resultados
+        (
+            usuario_id,
+            quiz_id,
+            acertos,
+            erros,
+            porcentagem
+        )
+
+        VALUES
+        (
+            :usuario,
+            :id,
+            :acertos,
+            :erros,
+            :porcentagem
+        )"
+
+            );
+        }
 
         return $sql->execute([
 
             ':usuario' => $usuarioId,
-            ':tema' => $temaId,
+            ':id' => $id,
             ':acertos' => $acertos,
             ':erros' => $erros,
             ':porcentagem' => $porcentagem

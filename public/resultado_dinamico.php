@@ -5,7 +5,7 @@ require_once '../app/Classes/Database.php';
 require_once '../app/Classes/Resultado.php';
 
 if (
-    !isset($_SESSION['usuario_id'])
+    !isset($_SESSION['usuario'])
 ) {
 
     header("Location:../index.php");
@@ -69,7 +69,8 @@ $resultadoObj->salvar(
     $quizId,
     $acertos,
     $erros,
-    $porcentagem
+    $porcentagem,
+    'quiz'
 
 );
 
