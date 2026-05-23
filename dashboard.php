@@ -22,7 +22,12 @@ $sql = $conn->query(
     "SELECT
 
 u.nome_completo,
-t.nome AS tema,
+
+COALESCE(
+t.nome,
+q.titulo
+) AS treinamento,
+
 r.acertos,
 r.erros,
 r.porcentagem,
@@ -33,8 +38,11 @@ FROM resultados r
 INNER JOIN usuarios u
 ON r.usuario_id=u.id
 
-INNER JOIN temas t
+LEFT JOIN temas t
 ON r.tema_id=t.id
+
+LEFT JOIN quizzes q
+ON r.quiz_id=q.id
 
 ORDER BY r.data_realizacao DESC"
 
@@ -52,13 +60,17 @@ $media = 0;
 if ($totalTreinamentos > 0) {
 
     $soma = array_sum(
+
         array_column(
             $resultados,
             'porcentagem'
         )
+
     );
 
-    $media = $soma / $totalTreinamentos;
+    $media =
+        $soma /
+        $totalTreinamentos;
 }
 
 $funcionarios = array_unique(
@@ -70,7 +82,11 @@ $funcionarios = array_unique(
 
 );
 
-$totalFuncionarios = count($funcionarios);
+$totalFuncionarios =
+    count(
+        $funcionarios
+    );
+
 
 $quizzes = $conn->query(
 
@@ -78,9 +94,7 @@ $quizzes = $conn->query(
 FROM quizzes
 ORDER BY criado_em DESC"
 
-)->fetchAll(
-    PDO::FETCH_ASSOC
-);
+)->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -91,9 +105,14 @@ ORDER BY criado_em DESC"
 
     <meta charset="UTF-8">
 
-    <title>Dashboard</title>
+    <title>
 
-    <link rel="stylesheet"
+        Dashboard
+
+    </title>
+
+    <link
+        rel="stylesheet"
         href="login/css/dashboard.css">
 
 </head>
@@ -108,8 +127,17 @@ ORDER BY criado_em DESC"
 
             <div class="logo-text">
 
-                <h2>Corporate Training</h2>
-                <span>PAINEL ADMINISTRATIVO</span>
+                <h2>
+
+                    Corporate Training
+
+                </h2>
+
+                <span>
+
+                    PAINEL ADMINISTRATIVO
+
+                </span>
 
             </div>
 
@@ -129,7 +157,9 @@ ORDER BY criado_em DESC"
 
             </a>
 
-            <a href="admin_quiz.php" class="btn-criar">
+            <a
+                href="admin_quiz.php"
+                class="btn-criar">
 
                 Criar Quiz
 
@@ -139,14 +169,17 @@ ORDER BY criado_em DESC"
 
     </header>
 
-
     <main class="container">
 
         <div class="cards">
 
             <div class="card-info">
 
-                <h3>Funcionários</h3>
+                <h3>
+
+                    Funcionários
+
+                </h3>
 
                 <p>
 
@@ -158,7 +191,11 @@ ORDER BY criado_em DESC"
 
             <div class="card-info">
 
-                <h3>Treinamentos</h3>
+                <h3>
+
+                    Treinamentos
+
+                </h3>
 
                 <p>
 
@@ -170,7 +207,11 @@ ORDER BY criado_em DESC"
 
             <div class="card-info">
 
-                <h3>Média Geral</h3>
+                <h3>
+
+                    Média Geral
+
+                </h3>
 
                 <p>
 
@@ -181,7 +222,6 @@ ORDER BY criado_em DESC"
             </div>
 
         </div>
-
 
         <div class="dashboard-box">
 
@@ -200,7 +240,7 @@ ORDER BY criado_em DESC"
                         <tr>
 
                             <th>Funcionário</th>
-                            <th>Tema</th>
+                            <th>Treinamento</th>
                             <th>Acertos</th>
                             <th>Erros</th>
                             <th>Desempenho</th>
@@ -224,7 +264,7 @@ ORDER BY criado_em DESC"
 
                                 <td>
 
-                                    <?= $r['tema'] ?>
+                                    <?= $r['treinamento'] ?>
 
                                 </td>
 
@@ -246,7 +286,6 @@ ORDER BY criado_em DESC"
 
                                         <div
                                             class="barra-resultado"
-
                                             style="width:
 <?= round($r['porcentagem']) ?>%">
 
@@ -315,9 +354,7 @@ ORDER BY criado_em DESC"
                 <a
                     href="excluir_quiz.php?id=<?= $quiz['id'] ?>"
                     class="btn-excluir"
-                    onclick="return confirm(
-'Excluir este treinamento?'
-)">
+                    onclick="return confirm('Excluir este treinamento?')">
 
                     Excluir
 
@@ -328,6 +365,7 @@ ORDER BY criado_em DESC"
         <?php endforeach; ?>
 
     </div>
+
 </body>
 
 </html>
