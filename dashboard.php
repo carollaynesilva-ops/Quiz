@@ -17,9 +17,20 @@ if ($_SESSION['tipo'] != 'admin') {
 
 $conn = Database::conectar();
 
-$sql = $conn->query(
+$funcionarioFiltro =
+    $_GET['funcionario'] ?? '';
 
-    "SELECT
+$treinamentoFiltro =
+    $_GET['treinamento'] ?? '';
+
+$statusFiltro =
+    $_GET['status'] ?? '';
+
+$query = "
+
+SELECT
+
+r.id,
 
 u.nome_completo,
 
@@ -44,11 +55,70 @@ ON r.tema_id=t.id
 LEFT JOIN quizzes q
 ON r.quiz_id=q.id
 
-ORDER BY r.data_realizacao DESC"
+WHERE 1=1
 
-);
+";
 
-$resultados = $sql->fetchAll(PDO::FETCH_ASSOC);
+$params = [];
+
+
+/* filtro funcionário */
+
+if (!empty($funcionarioFiltro)) {
+
+    $query .= "
+AND u.nome_completo
+LIKE :funcionario
+";
+
+    $params[':funcionario'] =
+        "%" . $funcionarioFiltro . "%";
+}
+
+
+/* filtro treinamento */
+
+if (!empty($treinamentoFiltro)) {
+
+    $query .= "
+AND (
+t.nome LIKE :treinamento
+OR
+q.titulo LIKE :treinamento
+)
+";
+
+    $params[':treinamento'] =
+        "%" . $treinamentoFiltro . "%";
+}
+
+
+/* filtro status */
+
+if ($statusFiltro == 'reprovado') {
+
+    $query .= "
+AND r.porcentagem < 60
+";
+} elseif ($statusFiltro == 'aprovado') {
+
+    $query .= "
+AND r.porcentagem >= 60
+";
+}
+
+
+$query .= "
+ORDER BY r.data_realizacao DESC
+";
+
+$sql =
+    $conn->prepare($query);
+
+$sql->execute($params);
+
+$resultados =
+    $sql->fetchAll(PDO::FETCH_ASSOC);
 
 
 /* ESTATÍSTICAS */
@@ -231,6 +301,68 @@ ORDER BY criado_em DESC"
 
             </h1>
 
+            <form method="GET" class="filtros">
+
+                <input
+                    type="text"
+                    name="funcionario"
+                    placeholder="Pesquisar funcionário"
+                    value="<?= $funcionarioFiltro ?>">
+
+                <input
+                    type="text"
+                    name="treinamento"
+                    placeholder="Pesquisar treinamento"
+                    value="<?= $treinamentoFiltro ?>">
+
+                <select name="status">
+
+                    <option value="">
+
+                        Todos resultados
+
+                    </option>
+
+                    <option
+                        value="aprovado"
+
+                        <?= $statusFiltro == 'aprovado'
+                            ? 'selected'
+                            : '' ?>>
+
+                        Aprovados
+
+                    </option>
+
+                    <option
+                        value="reprovado"
+
+                        <?= $statusFiltro == 'reprovado'
+                            ? 'selected'
+                            : '' ?>>
+
+                        Reprovados
+
+                    </option>
+
+                </select>
+
+                <button type="submit">
+
+                    Filtrar
+
+                </button>
+
+                <a
+                    href="dashboard.php"
+                    class="btn-limpar">
+
+                    Limpar
+
+                </a>
+
+            </form>
+
             <div class="table-container">
 
                 <table>
@@ -293,7 +425,24 @@ ORDER BY criado_em DESC"
 
                                         <span>
 
-                                            <?= round($r['porcentagem']) ?>%
+                                            <?php
+
+                                            $porcentagem =
+                                                round($r['porcentagem']);
+
+                                            ?>
+
+                                            <span class="
+
+<?= $porcentagem < 60
+                                ? 'reprovado'
+                                : 'aprovado' ?>
+
+">
+
+                                                <?= $porcentagem ?>%
+
+                                            </span>
 
                                         </span>
 

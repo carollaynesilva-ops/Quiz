@@ -6,6 +6,51 @@ require_once '../app/Classes/Database.php';
 
 $conn = Database::conectar();
 
+$usuarioId = $_SESSION['usuario_id'];
+
+$sql = $conn->prepare(
+
+    "SELECT
+
+COALESCE(
+tema_id,
+quiz_id
+) AS treinamento,
+
+MAX(porcentagem) AS nota
+
+FROM resultados
+
+WHERE usuario_id = :usuario
+
+GROUP BY
+tema_id,
+quiz_id"
+
+);
+
+$sql->execute([
+
+    ':usuario' => $usuarioId
+
+]);
+
+$historico =
+    $sql->fetchAll(PDO::FETCH_ASSOC);
+
+$treinamentoPendente = null;
+
+foreach ($historico as $item) {
+
+    if ($item['nota'] < 60) {
+
+        $treinamentoPendente =
+            (string)$item['treinamento'];
+
+        break;
+    }
+}
+
 $sql = $conn->query(
 
     "SELECT *
@@ -115,94 +160,153 @@ $quizzes = $sql->fetchAll(
 
         </section>
 
+        <?php if ($treinamentoPendente): ?>
+
+            <div class="alerta-refazer">
+
+                ⚠ Você possui um treinamento com menos de 60%.
+                Conclua-o novamente para continuar.
+
+            </div>
+
+        <?php endif; ?>
+
+        <?php
+
+        $notasTreinamentos = [];
+
+        $sql = $conn->prepare(
+
+            "SELECT
+tema_id,
+MAX(porcentagem) as nota
+
+FROM resultados
+
+WHERE usuario_id = :usuario
+
+GROUP BY tema_id"
+
+        );
+
+        $sql->execute([
+
+            ':usuario' => $usuarioId
+
+        ]);
+
+        foreach ($sql->fetchAll(PDO::FETCH_ASSOC) as $resultado) {
+
+            $notasTreinamentos[$resultado['tema_id']] = $resultado['nota'];
+        }
+        ?>
+
         <section class="temas">
 
-            <!-- PRIMEIROS SOCORROS -->
-            <a href="curso.php?tema=primeirossocorros" class="card">
+            <?php
 
-                <img src="assets/img/primeiros-socorros.jpg" alt="Primeiros Socorros">
+            $cursos = [
 
-                <div class="card-info">
+                [
+                    'id' => 2,
+                    'tema' => 'primeirossocorros',
+                    'imagem' => 'primeiros-socorros.jpg',
+                    'categoria' => 'Segurança',
+                    'titulo' => 'Primeiros Socorros',
+                    'descricao' => 'Conhecimentos básicos para agir em emergências.'
+                ],
 
-                    <span class="categoria">
-                        Segurança
-                    </span>
+                [
+                    'id' => 1,
+                    'tema' => 'epi',
+                    'imagem' => 'epi.jpg',
+                    'categoria' => 'Proteção',
+                    'titulo' => "EPI's",
+                    'descricao' => 'Uso correto de equipamentos de proteção individual.'
+                ],
 
-                    <h2>Primeiros Socorros</h2>
+                [
+                    'id' => 3,
+                    'tema' => 'lgpd',
+                    'imagem' => 'lgpd.png',
+                    'categoria' => 'Segurança Digital',
+                    'titulo' => 'LGPD',
+                    'descricao' => 'Proteção de dados e boas práticas digitais.'
+                ],
 
-                    <p>
-                        Conhecimentos básicos para agir em emergências.
-                    </p>
+                [
+                    'id' => 4,
+                    'tema' => 'incendio',
+                    'imagem' => 'incendio.png',
+                    'categoria' => 'Emergência',
+                    'titulo' => 'Prevenção de Incêndio',
+                    'descricao' => 'Procedimentos básicos em situações de incêndio.'
+                ]
 
-                </div>
+            ];
 
-            </a>
+            foreach ($cursos as $curso):
 
-            <!-- EPI -->
-            <a href="curso.php?tema=epi" class="card">
+                $nota =
+                    $notasTreinamentos[$curso['id']] ?? null;
 
-                <img src="assets/img/epi.jpg" alt="EPI">
+                $reprovado =
+                    $nota !== null
+                    &&
+                    $nota < 60;
 
-                <div class="card-info">
+            ?>
 
-                    <span class="categoria">
-                        Proteção
-                    </span>
+                <a
+                    href="curso.php?tema=<?= $curso['tema'] ?>"
+                    class="card">
 
-                    <h2>EPI's</h2>
+                    <img
+                        src="assets/img/<?= $curso['imagem'] ?>"
+                        alt="">
 
-                    <p>
-                        Uso correto de equipamentos de proteção individual.
-                    </p>
+                    <div class="card-info">
 
-                </div>
+                        <span class="categoria">
 
-            </a>
+                            <?= $curso['categoria'] ?>
 
-            <!-- LGPD -->
-            <a href="curso.php?tema=lgpd" class="card">
+                        </span>
 
-                <img src="assets/img/lgpd.png" alt="LGPD">
+                        <h2>
 
-                <div class="card-info">
+                            <?= $curso['titulo'] ?>
 
-                    <span class="categoria">
-                        Segurança Digital
-                    </span>
+                        </h2>
 
-                    <h2>LGPD</h2>
+                        <p>
 
-                    <p>
-                        Proteção de dados e boas práticas digitais.
-                    </p>
+                            <?= $curso['descricao'] ?>
 
-                </div>
+                        </p>
 
-            </a>
+                        <?php if ($nota !== null): ?>
 
-            <!-- INCÊNDIO -->
-            <a href="curso.php?tema=incendio" class="card">
+                            <div class="status-curso
+<?= $reprovado
+                                ? 'reprovado'
+                                : 'aprovado' ?>">
 
-                <img src="assets/img/incendio.png" alt="Incêndio">
+                                <?= $reprovado
+                                    ? '❌ Refaça este treinamento'
+                                    : '✅ Concluído' ?>
 
-                <div class="card-info">
+                            </div>
 
-                    <span class="categoria">
-                        Emergência
-                    </span>
+                        <?php endif; ?>
 
-                    <h2>Prevenção de Incêndio</h2>
+                    </div>
 
-                    <p>
-                        Procedimentos básicos em situações de incêndio.
-                    </p>
+                </a>
 
-                </div>
-
-            </a>
+            <?php endforeach; ?>
 
         </section>
-
 
         <!-- OUTROS CURSOS -->
 

@@ -679,3 +679,51 @@ body.light-mode .novo-conteudo p {
     color: #64748b;
 
 }
+
+
+.alerta-refazer {
+
+    background: #dc2626;
+    color: white;
+
+    padding: 15px;
+    border-radius: 12px;
+
+    margin-bottom: 20px;
+
+    font-weight: bold;
+
+}
+
+
+.status-curso {
+
+    margin-top: 12px;
+
+    padding: 8px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    text-align: center;
+
+}
+
+.status-curso.aprovado {
+
+    background: #15803d;
+
+    color: white;
+
+}
+
+.status-curso.reprovado {
+
+    background: #dc2626;
+
+    color: white;
+
+}
