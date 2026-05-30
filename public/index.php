@@ -10,22 +10,46 @@ $usuarioId = $_SESSION['usuario_id'];
 
 $sql = $conn->prepare(
 
-    "SELECT
+    "SELECT r.*
 
-COALESCE(
-tema_id,
-quiz_id
-) AS treinamento,
+FROM resultados r
 
-MAX(porcentagem) AS nota
+INNER JOIN (
 
-FROM resultados
+    SELECT
 
-WHERE usuario_id = :usuario
+        usuario_id,
 
-GROUP BY
-tema_id,
-quiz_id"
+        tema_id,
+
+        quiz_id,
+
+        MAX(data_realizacao) AS ultima_data
+
+    FROM resultados
+
+    WHERE usuario_id = :usuario
+
+    GROUP BY
+
+        tema_id,
+
+        quiz_id
+
+) ultimos
+
+ON r.usuario_id = ultimos.usuario_id
+
+AND IFNULL(r.tema_id,0)
+=
+IFNULL(ultimos.tema_id,0)
+
+AND IFNULL(r.quiz_id,0)
+=
+IFNULL(ultimos.quiz_id,0)
+
+AND r.data_realizacao =
+ultimos.ultima_data"
 
 );
 
@@ -42,10 +66,9 @@ $treinamentoPendente = null;
 
 foreach ($historico as $item) {
 
-    if ($item['nota'] < 60) {
+    if ($item['porcentagem'] < 60) {
 
-        $treinamentoPendente =
-            (string)$item['treinamento'];
+        $treinamentoPendente = true;
 
         break;
     }
@@ -177,17 +200,40 @@ $quizzes = $sql->fetchAll(
 
         $sql = $conn->prepare(
 
-            "SELECT
-tema_id,
-MAX(porcentagem) as nota
+            "SELECT r.tema_id,
+            r.porcentagem
 
-FROM resultados
+     FROM resultados r
 
-WHERE usuario_id = :usuario
+     INNER JOIN (
 
-GROUP BY tema_id"
+         SELECT
+             tema_id,
+             MAX(data_realizacao) AS ultima_data
+
+         FROM resultados
+
+         WHERE usuario_id = :usuario
+
+         GROUP BY tema_id
+
+     ) ultimos
+
+     ON r.tema_id = ultimos.tema_id
+     AND r.data_realizacao = ultimos.ultima_data
+
+     WHERE r.usuario_id = :usuario"
 
         );
+
+        $sql->execute([
+            ':usuario' => $usuarioId
+        ]);
+
+        foreach ($sql->fetchAll(PDO::FETCH_ASSOC) as $resultado) {
+
+            $notasTreinamentos[$resultado['tema_id']] = $resultado['porcentagem'];
+        }
 
         $sql->execute([
 
