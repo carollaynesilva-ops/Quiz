@@ -47,13 +47,50 @@ r.data_realizacao
 FROM resultados r
 
 INNER JOIN usuarios u
-ON r.usuario_id=u.id
+ON r.usuario_id = u.id
 
 LEFT JOIN temas t
-ON r.tema_id=t.id
+ON r.tema_id = t.id
 
 LEFT JOIN quizzes q
-ON r.quiz_id=q.id
+ON r.quiz_id = q.id
+
+INNER JOIN (
+
+    SELECT
+
+        usuario_id,
+
+        tema_id,
+
+        quiz_id,
+
+        MAX(data_realizacao) AS ultima_data
+
+    FROM resultados
+
+    GROUP BY
+
+        usuario_id,
+
+        tema_id,
+
+        quiz_id
+
+) ultimos
+
+ON r.usuario_id = ultimos.usuario_id
+
+AND IFNULL(r.tema_id,0)
+=
+IFNULL(ultimos.tema_id,0)
+
+AND IFNULL(r.quiz_id,0)
+=
+IFNULL(ultimos.quiz_id,0)
+
+AND r.data_realizacao =
+ultimos.ultima_data
 
 WHERE 1=1
 
@@ -121,13 +158,40 @@ $resultados =
     $sql->fetchAll(PDO::FETCH_ASSOC);
 
 
-/* ESTATÍSTICAS */
 
-$totalTreinamentos = count($resultados);
+
+/* ========================= */
+/* ESTATÍSTICAS */
+/* ========================= */
+
+/* buscar quizzes criados */
+
+$quizzes = $conn->query(
+
+    "SELECT *
+    FROM quizzes
+    ORDER BY criado_em DESC"
+
+)->fetchAll(PDO::FETCH_ASSOC);
+
+
+/* quantidade de cursos */
+
+$totalTreinamentos =
+    count($quizzes) + 4;
+
+
+/* quantidade de avaliações */
+
+$totalResultados =
+    count($resultados);
+
+
+/* média geral */
 
 $media = 0;
 
-if ($totalTreinamentos > 0) {
+if ($totalResultados > 0) {
 
     $soma = array_sum(
 
@@ -140,8 +204,23 @@ if ($totalTreinamentos > 0) {
 
     $media =
         $soma /
-        $totalTreinamentos;
+        $totalResultados;
 }
+
+
+/* funcionários únicos */
+
+$funcionarios = array_unique(
+
+    array_column(
+        $resultados,
+        'nome_completo'
+    )
+
+);
+
+$totalFuncionarios =
+    count($funcionarios);
 
 $funcionarios = array_unique(
 
@@ -263,13 +342,29 @@ ORDER BY criado_em DESC"
 
                 <h3>
 
-                    Treinamentos
+                    Cursos Disponíveis
 
                 </h3>
 
                 <p>
 
                     <?= $totalTreinamentos ?>
+
+                </p>
+
+            </div>
+
+            <div class="card-info">
+
+                <h3>
+
+                    Avaliações
+
+                </h3>
+
+                <p>
+
+                    <?= $totalResultados ?>
 
                 </p>
 
